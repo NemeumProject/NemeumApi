@@ -1,31 +1,45 @@
 package com.udl.nemeum.models;
 
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+
+@Entity
+@Table(name = "sport", schema = "nemeum")
 public class SportBO {
 
-    private Long idSport;
+    private Integer idSport;
     private String name;
     private Integer maxPlayers;
-    private Boolean isIndoor;
+    private Boolean isTeamSport;
+    private List<ScenarioBO> scenarios = new ArrayList<>();
 
-    public SportBO(Long idSport, String name, Integer maxPlayers, Boolean isIndoor) {
+    public SportBO(Integer idSport, String name, Integer maxPlayers, Boolean isTeamSport) {
         this.idSport = idSport;
         this.name = name;
         this.maxPlayers = maxPlayers;
-        this.isIndoor = isIndoor;
+        this.isTeamSport = isTeamSport;
     }
 
     public SportBO(){
         super();
     }
 
-    public Long getIdSport() {
+    @Id
+    @Column(name = "id_sport")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public Integer getIdSport() {
         return idSport;
     }
 
-    public void setIdSport(Long idSport) {
+    public void setIdSport(Integer idSport) {
         this.idSport = idSport;
     }
 
+    @Column(name = "name_sport")
     public String getName() {
         return name;
     }
@@ -34,6 +48,7 @@ public class SportBO {
         this.name = name;
     }
 
+    @Column(name = "max_player")
     public Integer getMaxPlayers() {
         return maxPlayers;
     }
@@ -42,11 +57,23 @@ public class SportBO {
         this.maxPlayers = maxPlayers;
     }
 
-    public Boolean getIndoor() {
-        return isIndoor;
+    @Column(name="is_team_sport")
+    public Boolean getTeamSport() {
+        return isTeamSport;
     }
 
-    public void setIndoor(Boolean indoor) {
-        isIndoor = indoor;
+    public void setTeamSport(Boolean teamSport) {
+        isTeamSport = teamSport;
+    }
+
+    @OneToMany(mappedBy = "idSport", cascade=CascadeType.PERSIST)
+    @JsonIdentityReference(alwaysAsId = true)
+    @JsonIgnore
+    public List<ScenarioBO> getScenarios() {
+        return scenarios;
+    }
+
+    public void setScenarios(List<ScenarioBO> scenarios) {
+        this.scenarios = scenarios;
     }
 }

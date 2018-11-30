@@ -1,8 +1,17 @@
 package com.udl.nemeum.models;
 
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
+
+@Entity
+@Table(name = "companyuser", schema = "nemeum")
 public class CompanyUserBO {
 
-    private Long idCompanyUser;
+    private Integer idCompanyUser;
     private String username;
     private String password;
     private Boolean isPremium;
@@ -14,9 +23,10 @@ public class CompanyUserBO {
     private String city;
     private String address;
     private String postalCode;
-    private Integer number;
+    private Integer phone;
+    private List<ScenarioBO> scenarios = new ArrayList<>();
 
-    public CompanyUserBO(Long idCompanyUser, String username, String password, Boolean isPremium, String comercialName, String companyName, String contactPerson, String ssn, String email, String city, String address, String postalCode, Integer number) {
+    public CompanyUserBO(Integer idCompanyUser, String username, String password, Boolean isPremium, String comercialName, String companyName, String contactPerson, String ssn, String email, String city, String address, String postalCode, Integer phone) {
         this.idCompanyUser = idCompanyUser;
         this.username = username;
         this.password = password;
@@ -29,21 +39,25 @@ public class CompanyUserBO {
         this.city = city;
         this.address = address;
         this.postalCode = postalCode;
-        this.number = number;
+        this.phone = phone;
     }
 
     public CompanyUserBO(){
         super();
     }
 
-    public Long getIdCompanyUser() {
+    @Id
+    @Column(name = "id_company")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public Integer getIdCompanyUser() {
         return idCompanyUser;
     }
 
-    public void setIdCompanyUser(Long idCompanyUser) {
+    public void setIdCompanyUser(Integer idCompanyUser) {
         this.idCompanyUser = idCompanyUser;
     }
 
+    @Column(name = "username")
     public String getUsername() {
         return username;
     }
@@ -52,6 +66,7 @@ public class CompanyUserBO {
         this.username = username;
     }
 
+    @Column(name = "password")
     public String getPassword() {
         return password;
     }
@@ -60,6 +75,7 @@ public class CompanyUserBO {
         this.password = password;
     }
 
+    @Column(name = "ispremium")
     public Boolean getPremium() {
         return isPremium;
     }
@@ -68,6 +84,7 @@ public class CompanyUserBO {
         isPremium = premium;
     }
 
+    @Column(name = "comercial_name")
     public String getComercialName() {
         return comercialName;
     }
@@ -76,6 +93,7 @@ public class CompanyUserBO {
         this.comercialName = comercialName;
     }
 
+    @Column(name = "company_name")
     public String getCompanyName() {
         return companyName;
     }
@@ -84,6 +102,7 @@ public class CompanyUserBO {
         this.companyName = companyName;
     }
 
+    @Column(name = "contact_person")
     public String getContactPerson() {
         return contactPerson;
     }
@@ -92,6 +111,7 @@ public class CompanyUserBO {
         this.contactPerson = contactPerson;
     }
 
+    @Column(name = "ssn")
     public String getSsn() {
         return ssn;
     }
@@ -100,6 +120,7 @@ public class CompanyUserBO {
         this.ssn = ssn;
     }
 
+    @Column(name = "email")
     public String getEmail() {
         return email;
     }
@@ -108,6 +129,7 @@ public class CompanyUserBO {
         this.email = email;
     }
 
+    @Column(name = "city")
     public String getCity() {
         return city;
     }
@@ -116,6 +138,7 @@ public class CompanyUserBO {
         this.city = city;
     }
 
+    @Column(name = "address")
     public String getAddress() {
         return address;
     }
@@ -124,6 +147,7 @@ public class CompanyUserBO {
         this.address = address;
     }
 
+    @Column(name = "postal_code")
     public String getPostalCode() {
         return postalCode;
     }
@@ -132,11 +156,23 @@ public class CompanyUserBO {
         this.postalCode = postalCode;
     }
 
-    public Integer getNumber() {
-        return number;
+    @Column(name = "phone")
+    public Integer getPhone() {
+        return phone;
     }
 
-    public void setNumber(Integer number) {
-        this.number = number;
+    public void setPhone(Integer phone) {
+        this.phone = phone;
+    }
+
+    @OneToMany(mappedBy = "idCompany", cascade=CascadeType.PERSIST)
+    @JsonIdentityReference(alwaysAsId = true)
+    @JsonIgnore
+    public List<ScenarioBO> getScenarios() {
+        return scenarios;
+    }
+
+    public void setScenarios(List<ScenarioBO> scenarios) {
+        this.scenarios = scenarios;
     }
 }

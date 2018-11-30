@@ -1,18 +1,28 @@
 package com.udl.nemeum.models;
 
-import java.sql.Date;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import javax.persistence.*;
+import java.util.Date;
+import java.util.List;
+
+@Entity
+@Table(name = "scenario", schema = "nemeum")
 public class ScenarioBO {
 
-    private Long idScenario;
+    private Integer idScenario;
     private SportBO idSport;
     private Double price;
     private Boolean isIndoor;
     private Integer capacity;
     private CompanyUserBO idCompany;
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd hh:mm:ss")
     private Date dateScenario;
+    private List<UserScenarioBO> userScenarioBOList;
 
-    public ScenarioBO(Long idScenario, SportBO idSport, Double price, Boolean isIndoor, Integer capacity, CompanyUserBO idCompany, Date dateScenario) {
+    public ScenarioBO(Integer idScenario, SportBO idSport, Double price, Boolean isIndoor, Integer capacity, CompanyUserBO idCompany, Date dateScenario, List<UserScenarioBO> userScenarioBOList) {
         this.idScenario = idScenario;
         this.idSport = idSport;
         this.price = price;
@@ -20,20 +30,26 @@ public class ScenarioBO {
         this.capacity = capacity;
         this.idCompany = idCompany;
         this.dateScenario = dateScenario;
+        this.userScenarioBOList = userScenarioBOList;
     }
 
     public ScenarioBO(){
         super();
     }
 
-    public Long getIdScenario() {
+    @Id
+    @Column(name = "id_scenario")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    public Integer getIdScenario() {
         return idScenario;
     }
 
-    public void setIdScenario(Long idScenario) {
+    public void setIdScenario(Integer idScenario) {
         this.idScenario = idScenario;
     }
 
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "sport_id", referencedColumnName = "id_sport")
     public SportBO getIdSport() {
         return idSport;
     }
@@ -42,6 +58,7 @@ public class ScenarioBO {
         this.idSport = idSport;
     }
 
+    @Column(name = "price")
     public Double getPrice() {
         return price;
     }
@@ -50,6 +67,7 @@ public class ScenarioBO {
         this.price = price;
     }
 
+    @Column(name = "isindoor")
     public Boolean getIndoor() {
         return isIndoor;
     }
@@ -58,6 +76,7 @@ public class ScenarioBO {
         isIndoor = indoor;
     }
 
+    @Column(name = "capacity")
     public Integer getCapacity() {
         return capacity;
     }
@@ -66,6 +85,8 @@ public class ScenarioBO {
         this.capacity = capacity;
     }
 
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "company_id", referencedColumnName = "id_company")
     public CompanyUserBO getIdCompany() {
         return idCompany;
     }
@@ -74,11 +95,23 @@ public class ScenarioBO {
         this.idCompany = idCompany;
     }
 
+    @Column(name = "date_scenario")
     public Date getDateScenario() {
         return dateScenario;
     }
 
     public void setDateScenario(Date dateScenario) {
         this.dateScenario = dateScenario;
+    }
+
+    @OneToMany(mappedBy = "scenarioBO", cascade=CascadeType.PERSIST)
+    @JsonIdentityReference(alwaysAsId = true)
+    @JsonIgnore
+    public List<UserScenarioBO> getUserScenarioBOList() {
+        return userScenarioBOList;
+    }
+
+    public void setUserScenarioBOList(List<UserScenarioBO> userScenarioBOList) {
+        this.userScenarioBOList = userScenarioBOList;
     }
 }
