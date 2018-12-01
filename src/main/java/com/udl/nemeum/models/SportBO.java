@@ -16,12 +16,15 @@ public class SportBO {
     private Integer maxPlayers;
     private Boolean isTeamSport;
     private List<ScenarioBO> scenarios = new ArrayList<>();
+    private List<TeamBO> teams = new ArrayList<>();
 
-    public SportBO(Integer idSport, String name, Integer maxPlayers, Boolean isTeamSport) {
+    public SportBO(Integer idSport, String name, Integer maxPlayers, Boolean isTeamSport, List<ScenarioBO> scenarios, List<TeamBO> teams) {
         this.idSport = idSport;
         this.name = name;
         this.maxPlayers = maxPlayers;
         this.isTeamSport = isTeamSport;
+        this.scenarios = scenarios;
+        this.teams = teams;
     }
 
     public SportBO(){
@@ -75,5 +78,16 @@ public class SportBO {
 
     public void setScenarios(List<ScenarioBO> scenarios) {
         this.scenarios = scenarios;
+    }
+
+    @OneToMany(mappedBy = "sport", cascade=CascadeType.PERSIST)
+    @JsonIdentityReference(alwaysAsId = true)
+    @JsonIgnore
+    public List<TeamBO> getTeams() {
+        return teams;
+    }
+
+    public void setTeams(List<TeamBO> teams) {
+        this.teams = teams;
     }
 }

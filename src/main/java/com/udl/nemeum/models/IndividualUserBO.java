@@ -29,8 +29,9 @@ public class IndividualUserBO {
     private String postalCode;
     private Integer phone;
     private List<UserScenarioBO> scenarios = new ArrayList<>();
+    private List<TeamUserBO> teams = new ArrayList<>();
 
-    public IndividualUserBO(Integer idIndividualUser, String username, String password, Boolean isPremium, String firstName, String middleSurname, String lastSurname, String ssn, String email, Boolean freeTraining, Boolean freeFacility, Integer rentedHours, Integer trainedHours, String city, String address, String postalCode, Integer phone, List<UserScenarioBO> scenarios) {
+    public IndividualUserBO(Integer idIndividualUser, String username, String password, Boolean isPremium, String firstName, String middleSurname, String lastSurname, String ssn, String email, Boolean freeTraining, Boolean freeFacility, Integer rentedHours, Integer trainedHours, String city, String address, String postalCode, Integer phone, List<UserScenarioBO> scenarios, List<TeamUserBO> teams) {
         this.idIndividualUser = idIndividualUser;
         this.username = username;
         this.password = password;
@@ -49,6 +50,7 @@ public class IndividualUserBO {
         this.postalCode = postalCode;
         this.phone = phone;
         this.scenarios = scenarios;
+        this.teams = teams;
     }
 
     public IndividualUserBO(){
@@ -218,5 +220,16 @@ public class IndividualUserBO {
 
     public void setScenarios(List<UserScenarioBO> scenarios) {
         this.scenarios = scenarios;
+    }
+
+    @OneToMany(mappedBy = "user", cascade=CascadeType.PERSIST)
+    @JsonIdentityReference(alwaysAsId = true)
+    @JsonIgnore
+    public List<TeamUserBO> getTeams() {
+        return teams;
+    }
+
+    public void setTeams(List<TeamUserBO> teams) {
+        this.teams = teams;
     }
 }

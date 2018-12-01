@@ -91,4 +91,14 @@ public class IndividualUserService {
 
         return individualUserDTOList;
     }
+
+    public List<IndividualUserDTO> getUsersByTeam(Integer id){
+        List<IndividualUserBO> individualUserBOList = individualUserRepository.findUsersByTeam(id);
+        List<IndividualUserDTO> individualUserDTOList = new ArrayList<>();
+        for(IndividualUserBO individualUserBO : individualUserBOList){
+            individualUserDTOList.add(new IndividualUserDTO(individualUserBO));
+        }
+
+        return individualUserDTOList;
+    }
 }

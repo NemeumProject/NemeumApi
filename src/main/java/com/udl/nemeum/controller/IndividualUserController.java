@@ -38,8 +38,13 @@ public class IndividualUserController {
     }
 
     @RequestMapping(value = "/scenario/{idScenario}", method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE})
-    public List<IndividualUserDTO> getScenario(@PathVariable("idScenario") Integer id) {
+    public List<IndividualUserDTO> getUsersByScenario(@PathVariable("idScenario") Integer id) {
         return individualUserService.getUsersByScenario(id);
+    }
+
+    @RequestMapping(value = "/team/{idTeam}", method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE})
+    public List<IndividualUserDTO> getUsersByTeam(@PathVariable("idTeam") Integer id) {
+        return individualUserService.getUsersByTeam(id);
     }
 
 

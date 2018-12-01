@@ -2,12 +2,10 @@ package com.udl.nemeum.services;
 
 import com.udl.nemeum.dto.ScenarioDTO;
 import com.udl.nemeum.models.ScenarioBO;
-import com.udl.nemeum.models.UserScenarioBO;
 import com.udl.nemeum.repository.CompanyUserRepository;
 import com.udl.nemeum.repository.ScenarioRepository;
 import com.udl.nemeum.repository.SportRepository;
 import com.udl.nemeum.repository.UserScenarioRepository;
-import com.udl.nemeum.repositoryImpl.ScenarioRepositoryImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service("scenarioService")
-public class ScenarioService extends ScenarioRepositoryImpl {
+public class ScenarioService {
 
     @Autowired
     private ScenarioRepository scenarioRepository;

@@ -22,14 +22,14 @@ public class ScenarioController {
     private ScenarioService scenarioService;
 
     @RequestMapping(value = "/list", method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE})
-    public ResponseEntity<List<ScenarioDTO>> getAllUsers() throws IOException {
+    public ResponseEntity<List<ScenarioDTO>> getAllScenarios() throws IOException {
         List<ScenarioDTO> scenarios = scenarioService.getAllScenarios();
         return new ResponseEntity<List<ScenarioDTO>>(scenarios, HttpStatus.OK);
     }
 
     @RequestMapping(value = "/{idScenario}", method = RequestMethod.DELETE)
     @Transactional
-    public void deleteAllUsers(@PathVariable("idScenario") Integer id) {
+    public void deleteScenario(@PathVariable("idScenario") Integer id) {
         scenarioService.deleteScenario(id);
     }
 
