@@ -80,4 +80,15 @@ public class IndividualUserService {
 
         return individualUserBO;
     }
+
+    public List<IndividualUserDTO> getUsersByScenario(Integer id) {
+
+        List<IndividualUserBO> individualUserBOList = individualUserRepository.findUsersByScenario(id);
+        List<IndividualUserDTO> individualUserDTOList = new ArrayList<>();
+        for(IndividualUserBO individualUserBO : individualUserBOList){
+            individualUserDTOList.add(new IndividualUserDTO(individualUserBO));
+        }
+
+        return individualUserDTOList;
+    }
 }

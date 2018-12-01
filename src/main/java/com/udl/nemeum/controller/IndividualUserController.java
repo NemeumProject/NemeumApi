@@ -33,9 +33,15 @@ public class IndividualUserController {
     }
 
     @RequestMapping(value = "/{idUser}", method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE})
-    public IndividualUserDTO getScenario(@PathVariable("idUser") Integer id) {
+    public IndividualUserDTO getUser(@PathVariable("idUser") Integer id) {
         return individualUserService.getUser(id);
     }
+
+    @RequestMapping(value = "/scenario/{idScenario}", method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE})
+    public List<IndividualUserDTO> getScenario(@PathVariable("idScenario") Integer id) {
+        return individualUserService.getUsersByScenario(id);
+    }
+
 
     @RequestMapping(method = RequestMethod.POST, produces = { MediaType.APPLICATION_JSON_VALUE})
     public IndividualUserDTO add(UriComponentsBuilder ucBuilder, @RequestBody IndividualUserDTO input) {
