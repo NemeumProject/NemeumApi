@@ -20,9 +20,10 @@ public class ScenarioBO {
     private CompanyUserBO idCompany;
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd hh:mm:ss")
     private Date dateScenario;
+    private String description;
     private List<UserScenarioBO> userScenarioBOList;
 
-    public ScenarioBO(Integer idScenario, SportBO idSport, Double price, Boolean isIndoor, Integer capacity, CompanyUserBO idCompany, Date dateScenario, List<UserScenarioBO> userScenarioBOList) {
+    public ScenarioBO(Integer idScenario, SportBO idSport, Double price, Boolean isIndoor, Integer capacity, CompanyUserBO idCompany, Date dateScenario, String description, List<UserScenarioBO> userScenarioBOList) {
         this.idScenario = idScenario;
         this.idSport = idSport;
         this.price = price;
@@ -30,6 +31,7 @@ public class ScenarioBO {
         this.capacity = capacity;
         this.idCompany = idCompany;
         this.dateScenario = dateScenario;
+        this.description = description;
         this.userScenarioBOList = userScenarioBOList;
     }
 
@@ -102,6 +104,15 @@ public class ScenarioBO {
 
     public void setDateScenario(Date dateScenario) {
         this.dateScenario = dateScenario;
+    }
+
+    @Column(name = "description")
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     @OneToMany(mappedBy = "scenarioBO", cascade=CascadeType.PERSIST)

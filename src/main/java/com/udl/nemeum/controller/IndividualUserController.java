@@ -28,7 +28,7 @@ public class IndividualUserController {
 
     @RequestMapping(value = "/{idUser}", method = RequestMethod.DELETE)
     @Transactional
-    public void deleteAllUsers(@PathVariable("idUser") Integer id) {
+    public void deleteUser(@PathVariable("idUser") Integer id) {
         individualUserService.deleteUser(id);
     }
 

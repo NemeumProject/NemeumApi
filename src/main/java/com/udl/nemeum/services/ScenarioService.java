@@ -56,6 +56,7 @@ public class ScenarioService {
         bo.setIdSport(sportRepository.findByidSport(dto.getIdSport()));
         bo.setIndoor(dto.getIndoor());
         bo.setPrice(dto.getPrice());
+        bo.setDescription(dto.getDescription());
 
         return bo;
     }

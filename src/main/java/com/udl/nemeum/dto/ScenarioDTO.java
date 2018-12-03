@@ -15,6 +15,7 @@ public class ScenarioDTO {
     private Integer idCompany;
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd hh:mm:ss")
     private Date dateScenario;
+    private String description;
 
     public ScenarioDTO(ScenarioBO bo) {
         this.idScenario = bo.getIdScenario();
@@ -24,6 +25,7 @@ public class ScenarioDTO {
         this.capacity = bo.getCapacity();
         this.idCompany = bo.getIdCompany().getIdCompanyUser();
         this.dateScenario = bo.getDateScenario();
+        this.description = bo.getDescription();
     }
 
     public ScenarioDTO(){
@@ -83,5 +85,13 @@ public class ScenarioDTO {
 
     public void setDateScenario(Date dateScenario) {
         this.dateScenario = dateScenario;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 }
