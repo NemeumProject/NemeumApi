@@ -47,6 +47,10 @@ public class IndividualUserController {
         return individualUserService.getUsersByTeam(id);
     }
 
+    @RequestMapping(value = "/sport/{idSport}", method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE})
+    public List<IndividualUserDTO> getUsersBySport(@PathVariable("idSport") Integer id) {
+        return individualUserService.getUsersBySport(id);
+    }
 
     @RequestMapping(method = RequestMethod.POST, produces = { MediaType.APPLICATION_JSON_VALUE})
     public IndividualUserDTO add(UriComponentsBuilder ucBuilder, @RequestBody IndividualUserDTO input) {

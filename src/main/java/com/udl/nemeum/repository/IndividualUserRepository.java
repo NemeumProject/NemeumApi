@@ -18,4 +18,9 @@ public interface IndividualUserRepository extends JpaRepository<IndividualUserBO
             " INNER JOIN TeamBO team ON (teamuser.team = team.idTeam)" +
             " WHERE team.idTeam = :id")
     List<IndividualUserBO> findUsersByTeam(Integer id);
+    @Query("SELECT DISTINCT userind FROM IndividualUserBO userind INNER JOIN UserSportBO usersport ON (userind.idIndividualUser = usersport.userLevel)" +
+            " INNER JOIN SportBO sport ON (usersport.sportLevel = sport.idSport)" +
+            " WHERE sport.idSport = :id")
+    List<IndividualUserBO> findUsersBySport(Integer id);
+
 }
