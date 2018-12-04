@@ -1,9 +1,7 @@
 package com.udl.nemeum.services;
 
 import com.udl.nemeum.dto.IndividualUserDTO;
-import com.udl.nemeum.dto.ScenarioDTO;
 import com.udl.nemeum.models.IndividualUserBO;
-import com.udl.nemeum.models.ScenarioBO;
 import com.udl.nemeum.repository.IndividualUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
