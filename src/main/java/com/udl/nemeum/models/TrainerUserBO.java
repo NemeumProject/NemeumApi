@@ -1,6 +1,11 @@
 package com.udl.nemeum.models;
 
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "traineruser", schema = "nemeum")
@@ -21,8 +26,9 @@ public class TrainerUserBO {
     private String postalCode;
     private Integer phone;
     private String description;
+    List<TrainerSportBO> trainerSportBOList = new ArrayList<>();
 
-    public TrainerUserBO(Integer idTrainerUser, String username, String password, Boolean isPremium, String firstName, String middleSurname, String lastSurname, String ssn, String email, Integer teachedHours, String city, String address, String postalCode, Integer phone, String description) {
+    public TrainerUserBO(Integer idTrainerUser, String username, String password, Boolean isPremium, String firstName, String middleSurname, String lastSurname, String ssn, String email, Integer teachedHours, String city, String address, String postalCode, Integer phone, String description, List<TrainerSportBO> trainerSportBOList) {
         this.idTrainerUser = idTrainerUser;
         this.username = username;
         this.password = password;
@@ -38,6 +44,7 @@ public class TrainerUserBO {
         this.postalCode = postalCode;
         this.phone = phone;
         this.description = description;
+        this.trainerSportBOList = trainerSportBOList;
     }
 
     public TrainerUserBO(){
@@ -179,5 +186,16 @@ public class TrainerUserBO {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @OneToMany(mappedBy = "trainer", cascade=CascadeType.PERSIST)
+    @JsonIdentityReference(alwaysAsId = true)
+    @JsonIgnore
+    public List<TrainerSportBO> getTrainerSportBOList() {
+        return trainerSportBOList;
+    }
+
+    public void setTrainerSportBOList(List<TrainerSportBO> trainerSportBOList) {
+        this.trainerSportBOList = trainerSportBOList;
     }
 }

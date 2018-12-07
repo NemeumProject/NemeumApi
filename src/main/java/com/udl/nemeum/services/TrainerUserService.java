@@ -1,6 +1,8 @@
 package com.udl.nemeum.services;
 
+import com.udl.nemeum.dto.TrainerSportDTO;
 import com.udl.nemeum.dto.TrainerUserDTO;
+import com.udl.nemeum.models.TrainerSportBO;
 import com.udl.nemeum.models.TrainerUserBO;
 import com.udl.nemeum.repository.TrainerUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,6 +57,12 @@ public class TrainerUserService {
             trainerUserRepository.deleteById(id);
         }
 
+    }
+
+    public List<TrainerUserDTO> getTrainersBySport(Integer idSport){
+        List<TrainerUserBO> trainerUserBOList = trainerUserRepository.findTrainersBySport(idSport);
+
+        return toDTO(trainerUserBOList);
     }
 
     public TrainerUserBO toBO(TrainerUserDTO dto){
