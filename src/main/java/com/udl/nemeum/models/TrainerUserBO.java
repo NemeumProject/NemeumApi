@@ -26,9 +26,10 @@ public class TrainerUserBO {
     private String postalCode;
     private Integer phone;
     private String description;
-    List<TrainerSportBO> trainerSportBOList = new ArrayList<>();
+    private List<TrainerSportBO> trainerSportBOList = new ArrayList<>();
+    private List<EventBO> events = new ArrayList<>();
 
-    public TrainerUserBO(Integer idTrainerUser, String username, String password, Boolean isPremium, String firstName, String middleSurname, String lastSurname, String ssn, String email, Integer teachedHours, String city, String address, String postalCode, Integer phone, String description, List<TrainerSportBO> trainerSportBOList) {
+    public TrainerUserBO(Integer idTrainerUser, String username, String password, Boolean isPremium, String firstName, String middleSurname, String lastSurname, String ssn, String email, Integer teachedHours, String city, String address, String postalCode, Integer phone, String description, List<TrainerSportBO> trainerSportBOList, List<EventBO> events) {
         this.idTrainerUser = idTrainerUser;
         this.username = username;
         this.password = password;
@@ -45,6 +46,7 @@ public class TrainerUserBO {
         this.phone = phone;
         this.description = description;
         this.trainerSportBOList = trainerSportBOList;
+        this.events = events;
     }
 
     public TrainerUserBO(){
@@ -197,5 +199,16 @@ public class TrainerUserBO {
 
     public void setTrainerSportBOList(List<TrainerSportBO> trainerSportBOList) {
         this.trainerSportBOList = trainerSportBOList;
+    }
+
+    @OneToMany(mappedBy = "trainerUser", cascade=CascadeType.PERSIST)
+    @JsonIdentityReference(alwaysAsId = true)
+    @JsonIgnore
+    public List<EventBO> getEvents() {
+        return events;
+    }
+
+    public void setEvents(List<EventBO> events) {
+        this.events = events;
     }
 }

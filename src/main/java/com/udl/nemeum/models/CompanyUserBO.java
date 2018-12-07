@@ -25,8 +25,9 @@ public class CompanyUserBO {
     private String postalCode;
     private Integer phone;
     private List<ScenarioBO> scenarios = new ArrayList<>();
+    private List<EventBO> events = new ArrayList<>();
 
-    public CompanyUserBO(Integer idCompanyUser, String username, String password, Boolean isPremium, String comercialName, String companyName, String contactPerson, String ssn, String email, String city, String address, String postalCode, Integer phone) {
+    public CompanyUserBO(Integer idCompanyUser, String username, String password, Boolean isPremium, String comercialName, String companyName, String contactPerson, String ssn, String email, String city, String address, String postalCode, Integer phone, List<ScenarioBO> scenarios, List<EventBO> events) {
         this.idCompanyUser = idCompanyUser;
         this.username = username;
         this.password = password;
@@ -40,6 +41,8 @@ public class CompanyUserBO {
         this.address = address;
         this.postalCode = postalCode;
         this.phone = phone;
+        this.scenarios = scenarios;
+        this.events = events;
     }
 
     public CompanyUserBO(){
@@ -174,5 +177,16 @@ public class CompanyUserBO {
 
     public void setScenarios(List<ScenarioBO> scenarios) {
         this.scenarios = scenarios;
+    }
+
+    @OneToMany(mappedBy = "companyUser", cascade=CascadeType.PERSIST)
+    @JsonIdentityReference(alwaysAsId = true)
+    @JsonIgnore
+    public List<EventBO> getEvents() {
+        return events;
+    }
+
+    public void setEvents(List<EventBO> events) {
+        this.events = events;
     }
 }
