@@ -8,6 +8,8 @@ import java.util.List;
 
 public interface TrainerUserRepository extends JpaRepository<TrainerUserBO, Integer> {
     TrainerUserBO findByidTrainerUser(Integer id);
+    TrainerUserBO findByusername(String id);
+    TrainerUserBO findByemail(String id);
     void deleteById(Integer id);
     List<TrainerUserBO> findAll();
     @Query("SELECT DISTINCT usertrain FROM TrainerUserBO usertrain INNER JOIN TrainerSportBO trainersport ON (usertrain.idTrainerUser = trainersport.trainer)" +
