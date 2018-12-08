@@ -14,7 +14,7 @@ import javax.transaction.Transactional;
 
 @RestController
 @RequestMapping("/userSport")
-public class UserRelatedTeamController {
+public class UserRelatedSportController {
 
     @Autowired
     private UserSportService userSportService;

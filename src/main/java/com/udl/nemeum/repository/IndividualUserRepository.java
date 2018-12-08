@@ -9,6 +9,7 @@ import java.util.List;
 
 public interface IndividualUserRepository extends JpaRepository<IndividualUserBO, Integer> {
     IndividualUserBO findByidIndividualUser(Integer id);
+    IndividualUserBO findByusername(String username);
     void deleteById(Integer id);
     List<IndividualUserBO> findAll();
     @Query("SELECT DISTINCT userind FROM IndividualUserBO userind INNER JOIN UserScenarioBO userscenario ON (userind.idIndividualUser = userscenario.userBO)" +
