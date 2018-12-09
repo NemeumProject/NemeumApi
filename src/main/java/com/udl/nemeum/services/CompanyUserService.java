@@ -3,17 +3,27 @@ package com.udl.nemeum.services;
 import com.udl.nemeum.dto.CompanyUserDTO;
 import com.udl.nemeum.models.CompanyUserBO;
 import com.udl.nemeum.repository.CompanyUserRepository;
+import com.udl.nemeum.repository.IndividualUserRepository;
+import com.udl.nemeum.repository.TrainerUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service("companyUserService")
 public class CompanyUserService {
 
     @Autowired
+    private IndividualUserRepository individualUserRepository;
+
+    @Autowired
     private CompanyUserRepository companyUserRepository;
+
+    @Autowired
+    private TrainerUserRepository trainerUserRepository;
 
     public List<CompanyUserDTO> getAllUsersCompany(){
         List<CompanyUserBO> companyUserDTOList = companyUserRepository.findAll();
@@ -30,11 +40,20 @@ public class CompanyUserService {
         }
     }
 
-    public CompanyUserDTO add(CompanyUserDTO dto){
-        CompanyUserBO bo = toBO(dto);
-        CompanyUserBO resultCompanyUser = companyUserRepository.save(bo);
+    public  Map<String, Object> add(CompanyUserDTO dto){
+        Map<String, Object> map = new HashMap<>();
+        if(individualUserRepository.findByemail(dto.getEmail()) != null || companyUserRepository.findByemail(dto.getEmail()) != null
+                || trainerUserRepository.findByemail(dto.getEmail()) != null){
+            map.put("exist", true);
+        }else{
+            map.put("exist", false);
+            CompanyUserBO bo = toBO(dto);
+            CompanyUserBO resultCompanyUser = companyUserRepository.save(bo);
+            map.put("dto", new CompanyUserDTO(resultCompanyUser));
+        }
 
-        return new CompanyUserDTO(resultCompanyUser);
+
+        return map;
     }
 
     public CompanyUserDTO modify(CompanyUserDTO dto){

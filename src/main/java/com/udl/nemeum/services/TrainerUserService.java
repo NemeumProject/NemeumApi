@@ -4,15 +4,25 @@ import com.udl.nemeum.dto.TrainerSportDTO;
 import com.udl.nemeum.dto.TrainerUserDTO;
 import com.udl.nemeum.models.TrainerSportBO;
 import com.udl.nemeum.models.TrainerUserBO;
+import com.udl.nemeum.repository.CompanyUserRepository;
+import com.udl.nemeum.repository.IndividualUserRepository;
 import com.udl.nemeum.repository.TrainerUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service("trainerUserService")
 public class TrainerUserService {
+
+    @Autowired
+    private IndividualUserRepository individualUserRepository;
+
+    @Autowired
+    private CompanyUserRepository companyUserRepository;
 
     @Autowired
     private TrainerUserRepository trainerUserRepository;
@@ -35,12 +45,19 @@ public class TrainerUserService {
         return new TrainerUserDTO(trainerUserRepository.findByidTrainerUser(id));
     }
 
-    public TrainerUserDTO addUser(TrainerUserDTO input){
-        TrainerUserBO trainerUserBO = toBO(input);
+    public  Map<String, Object> addUser(TrainerUserDTO input){
+        Map<String, Object> map = new HashMap<>();
+        if(individualUserRepository.findByemail(input.getEmail()) != null || companyUserRepository.findByemail(input.getEmail()) != null
+                || trainerUserRepository.findByemail(input.getEmail()) != null){
+            map.put("exist", true);
+        }else{
+            map.put("exist", false);
+            TrainerUserBO bo = toBO(input);
+            TrainerUserBO resultTrainerUser = trainerUserRepository.save(bo);
+            map.put("dto", new TrainerUserDTO(resultTrainerUser));
+        }
 
-        TrainerUserBO finalTrainerUser = trainerUserRepository.save(trainerUserBO);
-
-        return new TrainerUserDTO(finalTrainerUser);
+        return map;
     }
 
     public TrainerUserDTO modifyUser(TrainerUserDTO input){

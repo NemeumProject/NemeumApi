@@ -12,6 +12,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import javax.transaction.Transactional;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/user")
@@ -53,10 +54,15 @@ public class IndividualUserController {
     }
 
     @RequestMapping(method = RequestMethod.POST, produces = { MediaType.APPLICATION_JSON_VALUE})
-    public IndividualUserDTO add(UriComponentsBuilder ucBuilder, @RequestBody IndividualUserDTO input) {
+    public ResponseEntity<?> add(UriComponentsBuilder ucBuilder, @RequestBody IndividualUserDTO input) {
 
-        return individualUserService.addUser(input);
-
+        Map<String, Object> map = individualUserService.addUser(input);
+        if(map.get("exist").equals(true)){
+            return new ResponseEntity<String>("User already exists", HttpStatus.UNAUTHORIZED);
+        }else{
+            IndividualUserDTO user = (IndividualUserDTO) map.get("dto");
+            return new ResponseEntity<IndividualUserDTO>(user, HttpStatus.OK);
+        }
     }
 
     @RequestMapping(method = RequestMethod.PUT, produces = { MediaType.APPLICATION_JSON_VALUE})

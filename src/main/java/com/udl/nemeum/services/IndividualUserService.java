@@ -2,18 +2,28 @@ package com.udl.nemeum.services;
 
 import com.udl.nemeum.dto.IndividualUserDTO;
 import com.udl.nemeum.models.IndividualUserBO;
+import com.udl.nemeum.repository.CompanyUserRepository;
 import com.udl.nemeum.repository.IndividualUserRepository;
+import com.udl.nemeum.repository.TrainerUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service("individualUserService")
 public class IndividualUserService {
 
     @Autowired
     private IndividualUserRepository individualUserRepository;
+
+    @Autowired
+    private CompanyUserRepository companyUserRepository;
+
+    @Autowired
+    private TrainerUserRepository trainerUserRepository;
 
     public List<IndividualUserDTO> getAllUsers(){
         List<IndividualUserBO> individualUserBOS = individualUserRepository.findAll();
@@ -33,12 +43,19 @@ public class IndividualUserService {
         return new IndividualUserDTO(individualUserRepository.findByidIndividualUser(id));
     }
 
-    public IndividualUserDTO addUser(IndividualUserDTO input){
-        IndividualUserBO individualUserBO = toBO(input);
+    public Map<String, Object> addUser(IndividualUserDTO input){
+        Map<String, Object> map = new HashMap<>();
+        if(individualUserRepository.findByemail(input.getEmail()) != null || companyUserRepository.findByemail(input.getEmail()) != null
+                || trainerUserRepository.findByemail(input.getEmail()) != null){
+            map.put("exist", true);
+        }else{
+            map.put("exist", false);
+            IndividualUserBO individualUserBO = toBO(input);
 
-        IndividualUserBO finalUserBO = individualUserRepository.save(individualUserBO);
-
-        return new IndividualUserDTO(finalUserBO);
+            IndividualUserBO finalUserBO = individualUserRepository.save(individualUserBO);
+            map.put("dto", new IndividualUserDTO(finalUserBO));
+        }
+        return map;
     }
 
     public  IndividualUserDTO modifyUser(IndividualUserDTO input){

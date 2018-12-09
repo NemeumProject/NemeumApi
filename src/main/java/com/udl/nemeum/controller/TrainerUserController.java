@@ -12,6 +12,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import javax.transaction.Transactional;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/traineruser")
@@ -39,9 +40,15 @@ public class TrainerUserController {
 
 
     @RequestMapping(method = RequestMethod.POST, produces = { MediaType.APPLICATION_JSON_VALUE})
-    public TrainerUserDTO add(UriComponentsBuilder ucBuilder, @RequestBody TrainerUserDTO input) {
+    public ResponseEntity<?> add(UriComponentsBuilder ucBuilder, @RequestBody TrainerUserDTO input) {
 
-        return trainerUserService.addUser(input);
+        Map<String, Object> map = trainerUserService.addUser(input);
+        if(map.get("exist").equals(true)){
+            return new ResponseEntity<String>("User already exists", HttpStatus.UNAUTHORIZED);
+        }else{
+            TrainerUserDTO user = (TrainerUserDTO) map.get("dto");
+            return new ResponseEntity<TrainerUserDTO>(user, HttpStatus.OK);
+        }
 
     }
 
