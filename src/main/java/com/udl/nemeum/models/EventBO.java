@@ -1,7 +1,11 @@
 package com.udl.nemeum.models;
 
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "event", schema = "nemeum")
@@ -9,8 +13,6 @@ public class EventBO {
 
     private Integer idEvent;
     private CompanyUserBO companyUser;
-    private IndividualUserBO individualUser;
-    private TrainerUserBO trainerUser;
     private SportBO sport;
     private Boolean isIndoor;
     private Integer capacity;
@@ -21,12 +23,14 @@ public class EventBO {
     private Integer phone;
     private Date dateEvent;
     private String description;
+    private String title;
+    private String image;
+    private List<TrainerEventBO> trainerEvent;
+    private List<IndividualEventBO> individualEvent;
 
-    public EventBO(Integer idEvent, CompanyUserBO companyUser, IndividualUserBO individualUser, TrainerUserBO trainerUser, SportBO sport, Boolean isIndoor, Integer capacity, Double price, String city, String address, String postalCode, Integer phone, Date dateEvent, String description) {
+    public EventBO(Integer idEvent, CompanyUserBO companyUser, SportBO sport, Boolean isIndoor, Integer capacity, Double price, String city, String address, String postalCode, Integer phone, Date dateEvent, String description, String title, String image, List<TrainerEventBO> trainerEvent, List<IndividualEventBO> individualEvent) {
         this.idEvent = idEvent;
         this.companyUser = companyUser;
-        this.individualUser = individualUser;
-        this.trainerUser = trainerUser;
         this.sport = sport;
         this.isIndoor = isIndoor;
         this.capacity = capacity;
@@ -37,6 +41,10 @@ public class EventBO {
         this.phone = phone;
         this.dateEvent = dateEvent;
         this.description = description;
+        this.title = title;
+        this.image = image;
+        this.trainerEvent = trainerEvent;
+        this.individualEvent = individualEvent;
     }
 
     public EventBO(){
@@ -62,26 +70,6 @@ public class EventBO {
 
     public void setCompanyUser(CompanyUserBO companyUser) {
         this.companyUser = companyUser;
-    }
-
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "id_user", referencedColumnName = "id_user")
-    public IndividualUserBO getIndividualUser() {
-        return individualUser;
-    }
-
-    public void setIndividualUser(IndividualUserBO individualUser) {
-        this.individualUser = individualUser;
-    }
-
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "id_trainer", referencedColumnName = "id_trainer")
-    public TrainerUserBO getTrainerUser() {
-        return trainerUser;
-    }
-
-    public void setTrainerUser(TrainerUserBO trainerUser) {
-        this.trainerUser = trainerUser;
     }
 
     @ManyToOne(cascade = CascadeType.PERSIST)
@@ -173,5 +161,45 @@ public class EventBO {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Column(name = "title")
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    @Column(name = "image")
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    @OneToMany(mappedBy = "event", cascade=CascadeType.PERSIST)
+    @JsonIdentityReference(alwaysAsId = true)
+    @JsonIgnore
+    public List<TrainerEventBO> getTrainerEvent() {
+        return trainerEvent;
+    }
+
+    public void setTrainerEvent(List<TrainerEventBO> trainerEvent) {
+        this.trainerEvent = trainerEvent;
+    }
+
+    @OneToMany(mappedBy = "eventIndividual", cascade=CascadeType.PERSIST)
+    @JsonIdentityReference(alwaysAsId = true)
+    @JsonIgnore
+    public List<IndividualEventBO> getIndividualEvent() {
+        return individualEvent;
+    }
+
+    public void setIndividualEvent(List<IndividualEventBO> individualEvent) {
+        this.individualEvent = individualEvent;
     }
 }

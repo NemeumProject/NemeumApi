@@ -92,6 +92,9 @@ public class IndividualUserService {
         individualUserBO.setSsn(dto.getSsn());
         individualUserBO.setTrainedHours(dto.getTrainedHours());
         individualUserBO.setUsername(dto.getUsername());
+        individualUserBO.setDescription(dto.getDescription());
+        individualUserBO.setTitle(dto.getTitle());
+        individualUserBO.setImage(dto.getImage());
 
         return individualUserBO;
     }

@@ -21,9 +21,12 @@ public class ScenarioBO {
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd hh:mm:ss")
     private Date dateScenario;
     private String description;
+    private String title;
+    private String image;
+    private String address;
     private List<UserScenarioBO> userScenarioBOList;
 
-    public ScenarioBO(Integer idScenario, SportBO idSport, Double price, Boolean isIndoor, Integer capacity, CompanyUserBO idCompany, Date dateScenario, String description, List<UserScenarioBO> userScenarioBOList) {
+    public ScenarioBO(Integer idScenario, SportBO idSport, Double price, Boolean isIndoor, Integer capacity, CompanyUserBO idCompany, Date dateScenario, String description, String title, String image, String address, List<UserScenarioBO> userScenarioBOList) {
         this.idScenario = idScenario;
         this.idSport = idSport;
         this.price = price;
@@ -32,6 +35,9 @@ public class ScenarioBO {
         this.idCompany = idCompany;
         this.dateScenario = dateScenario;
         this.description = description;
+        this.title = title;
+        this.image = image;
+        this.address = address;
         this.userScenarioBOList = userScenarioBOList;
     }
 
@@ -113,6 +119,33 @@ public class ScenarioBO {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Column(name = "title")
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    @Column(name = "image")
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    @Column(name = "address")
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     @OneToMany(mappedBy = "scenarioBO", cascade=CascadeType.PERSIST)

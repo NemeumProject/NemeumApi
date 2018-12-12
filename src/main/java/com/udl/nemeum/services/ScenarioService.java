@@ -57,6 +57,9 @@ public class ScenarioService {
         bo.setIndoor(dto.getIndoor());
         bo.setPrice(dto.getPrice());
         bo.setDescription(dto.getDescription());
+        bo.setTitle(dto.getTitle());
+        bo.setAddress(dto.getAddress());
+        bo.setImage(dto.getImage());
 
         return bo;
     }

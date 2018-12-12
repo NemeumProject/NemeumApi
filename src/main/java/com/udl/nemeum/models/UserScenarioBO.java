@@ -1,6 +1,9 @@
 package com.udl.nemeum.models;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name = "user_scenario", schema = "nemeum")
@@ -9,11 +12,20 @@ public class UserScenarioBO {
     private Integer userScenario;
     private IndividualUserBO userBO;
     private ScenarioBO scenarioBO;
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd hh:mm:ss")
+    private Date dateBooking;
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd hh:mm:ss")
+    private Date startScenario;
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd hh:mm:ss")
+    private Date endScenario;
 
-    public UserScenarioBO(Integer userScenario, IndividualUserBO userBO, ScenarioBO scenarioBO) {
+    public UserScenarioBO(Integer userScenario, IndividualUserBO userBO, ScenarioBO scenarioBO, Date dateBooking, Date startScenario, Date endScenario) {
         this.userScenario = userScenario;
         this.userBO = userBO;
         this.scenarioBO = scenarioBO;
+        this.dateBooking = dateBooking;
+        this.startScenario = startScenario;
+        this.endScenario = endScenario;
     }
 
     public UserScenarioBO(){
@@ -49,5 +61,32 @@ public class UserScenarioBO {
 
     public void setScenarioBO(ScenarioBO scenarioBO) {
         this.scenarioBO = scenarioBO;
+    }
+
+    @Column(name = "date_booking")
+    public Date getDateBooking() {
+        return dateBooking;
+    }
+
+    public void setDateBooking(Date dateBooking) {
+        this.dateBooking = dateBooking;
+    }
+
+    @Column(name = "start_scenario")
+    public Date getStartScenario() {
+        return startScenario;
+    }
+
+    public void setStartScenario(Date startScenario) {
+        this.startScenario = startScenario;
+    }
+
+    @Column(name = "end_scenario")
+    public Date getEndScenario() {
+        return endScenario;
+    }
+
+    public void setEndScenario(Date endScenario) {
+        this.endScenario = endScenario;
     }
 }

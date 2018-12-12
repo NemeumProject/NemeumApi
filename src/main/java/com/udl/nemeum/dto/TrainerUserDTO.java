@@ -19,6 +19,8 @@ public class TrainerUserDTO {
     private String postalCode;
     private Integer phone;
     private String description;
+    private String title;
+    private String image;
 
     public TrainerUserDTO(TrainerUserBO bo) {
         this.idTrainerUser = bo.getIdTrainerUser();
@@ -36,6 +38,8 @@ public class TrainerUserDTO {
         this.postalCode = bo.getPostalCode();
         this.phone = bo.getPhone();
         this.description = bo.getDescription();
+        this.title = bo.getTitle();
+        this.image = bo.getImage();
     }
 
     public TrainerUserDTO(){
@@ -160,5 +164,21 @@ public class TrainerUserDTO {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

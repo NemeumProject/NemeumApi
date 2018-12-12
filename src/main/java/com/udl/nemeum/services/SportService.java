@@ -47,9 +47,7 @@ public class SportService {
 
     private SportBO toBO(SportDTO input){
         SportBO bo = new SportBO();
-        bo.setMaxPlayers(input.getMaxPlayers());
         bo.setName(input.getName());
-        bo.setTeamSport(input.getTeamSport());
 
         return bo;
     }

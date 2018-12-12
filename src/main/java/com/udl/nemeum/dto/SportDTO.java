@@ -6,14 +6,10 @@ public class SportDTO {
 
     private Integer idSport;
     private String name;
-    private Integer maxPlayers;
-    private Boolean isTeamSport;
 
     public SportDTO(SportBO bo) {
         this.idSport = bo.getIdSport();
         this.name = bo.getName();
-        this.maxPlayers = bo.getMaxPlayers();
-        this.isTeamSport = bo.getTeamSport();
     }
 
     public SportDTO(){
@@ -34,21 +30,5 @@ public class SportDTO {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Integer getMaxPlayers() {
-        return maxPlayers;
-    }
-
-    public void setMaxPlayers(Integer maxPlayers) {
-        this.maxPlayers = maxPlayers;
-    }
-
-    public Boolean getTeamSport() {
-        return isTeamSport;
-    }
-
-    public void setTeamSport(Boolean teamSport) {
-        isTeamSport = teamSport;
     }
 }

@@ -26,10 +26,12 @@ public class TrainerUserBO {
     private String postalCode;
     private Integer phone;
     private String description;
+    private String title;
+    private String image;
     private List<TrainerSportBO> trainerSportBOList = new ArrayList<>();
-    private List<EventBO> events = new ArrayList<>();
+    private List<TrainerEventBO> trainerEventBOList = new ArrayList<>();
 
-    public TrainerUserBO(Integer idTrainerUser, String username, String password, Boolean isPremium, String firstName, String middleSurname, String lastSurname, String ssn, String email, Integer teachedHours, String city, String address, String postalCode, Integer phone, String description, List<TrainerSportBO> trainerSportBOList, List<EventBO> events) {
+    public TrainerUserBO(Integer idTrainerUser, String username, String password, Boolean isPremium, String firstName, String middleSurname, String lastSurname, String ssn, String email, Integer teachedHours, String city, String address, String postalCode, Integer phone, String description, String title, String image, List<TrainerSportBO> trainerSportBOList, List<TrainerEventBO> trainerEventBOList) {
         this.idTrainerUser = idTrainerUser;
         this.username = username;
         this.password = password;
@@ -45,8 +47,10 @@ public class TrainerUserBO {
         this.postalCode = postalCode;
         this.phone = phone;
         this.description = description;
+        this.title = title;
+        this.image = image;
         this.trainerSportBOList = trainerSportBOList;
-        this.events = events;
+        this.trainerEventBOList = trainerEventBOList;
     }
 
     public TrainerUserBO(){
@@ -190,6 +194,24 @@ public class TrainerUserBO {
         this.description = description;
     }
 
+    @Column(name = "title")
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    @Column(name = "image")
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
     @OneToMany(mappedBy = "trainer", cascade=CascadeType.PERSIST)
     @JsonIdentityReference(alwaysAsId = true)
     @JsonIgnore
@@ -201,14 +223,14 @@ public class TrainerUserBO {
         this.trainerSportBOList = trainerSportBOList;
     }
 
-    @OneToMany(mappedBy = "trainerUser", cascade=CascadeType.PERSIST)
+    @OneToMany(mappedBy = "trainerEvent", cascade=CascadeType.PERSIST)
     @JsonIdentityReference(alwaysAsId = true)
     @JsonIgnore
-    public List<EventBO> getEvents() {
-        return events;
+    public List<TrainerEventBO> getTrainerEventBOList() {
+        return trainerEventBOList;
     }
 
-    public void setEvents(List<EventBO> events) {
-        this.events = events;
+    public void setTrainerEventBOList(List<TrainerEventBO> trainerEventBOList) {
+        this.trainerEventBOList = trainerEventBOList;
     }
 }

@@ -79,6 +79,9 @@ public class CompanyUserService {
         bo.setPremium(dto.getPremium());
         bo.setSsn(dto.getSsn());
         bo.setUsername(dto.getUsername());
+        bo.setTitle(dto.getTitle());
+        bo.setDescription(dto.getDescription());
+        bo.setImage(dto.getImage());
 
         return bo;
     }

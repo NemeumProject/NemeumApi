@@ -28,12 +28,14 @@ public class IndividualUserBO {
     private String address;
     private String postalCode;
     private Integer phone;
+    private String description;
+    private String title;
+    private String image;
     private List<UserScenarioBO> scenarios = new ArrayList<>();
     private List<TeamUserBO> teams = new ArrayList<>();
     private List<UserSportBO> sports = new ArrayList<>();
-    private List<EventBO> events = new ArrayList<>();
 
-    public IndividualUserBO(Integer idIndividualUser, String username, String password, Boolean isPremium, String firstName, String middleSurname, String lastSurname, String ssn, String email, Boolean freeTraining, Boolean freeFacility, Integer rentedHours, Integer trainedHours, String city, String address, String postalCode, Integer phone, List<UserScenarioBO> scenarios, List<TeamUserBO> teams, List<UserSportBO> sports, List<EventBO> events) {
+    public IndividualUserBO(Integer idIndividualUser, String username, String password, Boolean isPremium, String firstName, String middleSurname, String lastSurname, String ssn, String email, Boolean freeTraining, Boolean freeFacility, Integer rentedHours, Integer trainedHours, String city, String address, String postalCode, Integer phone, String description, String title, String image, List<UserScenarioBO> scenarios, List<TeamUserBO> teams, List<UserSportBO> sports) {
         this.idIndividualUser = idIndividualUser;
         this.username = username;
         this.password = password;
@@ -51,10 +53,12 @@ public class IndividualUserBO {
         this.address = address;
         this.postalCode = postalCode;
         this.phone = phone;
+        this.description = description;
+        this.title = title;
+        this.image = image;
         this.scenarios = scenarios;
         this.teams = teams;
         this.sports = sports;
-        this.events = events;
     }
 
     public IndividualUserBO(){
@@ -215,6 +219,33 @@ public class IndividualUserBO {
         this.phone = phone;
     }
 
+    @Column(name = "description")
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    @Column(name = "title")
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    @Column(name = "image")
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
     @OneToMany(mappedBy = "userBO", cascade=CascadeType.PERSIST)
     @JsonIdentityReference(alwaysAsId = true)
     @JsonIgnore
@@ -246,16 +277,5 @@ public class IndividualUserBO {
 
     public void setSports(List<UserSportBO> sports) {
         this.sports = sports;
-    }
-
-    @OneToMany(mappedBy = "individualUser", cascade=CascadeType.PERSIST)
-    @JsonIdentityReference(alwaysAsId = true)
-    @JsonIgnore
-    public List<EventBO> getEvents() {
-        return events;
-    }
-
-    public void setEvents(List<EventBO> events) {
-        this.events = events;
     }
 }

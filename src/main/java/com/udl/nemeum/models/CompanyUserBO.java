@@ -24,10 +24,13 @@ public class CompanyUserBO {
     private String address;
     private String postalCode;
     private Integer phone;
+    private String title;
+    private String description;
+    private String image;
     private List<ScenarioBO> scenarios = new ArrayList<>();
     private List<EventBO> events = new ArrayList<>();
 
-    public CompanyUserBO(Integer idCompanyUser, String username, String password, Boolean isPremium, String comercialName, String companyName, String contactPerson, String ssn, String email, String city, String address, String postalCode, Integer phone, List<ScenarioBO> scenarios, List<EventBO> events) {
+    public CompanyUserBO(Integer idCompanyUser, String username, String password, Boolean isPremium, String comercialName, String companyName, String contactPerson, String ssn, String email, String city, String address, String postalCode, Integer phone, String title, String description, String image, List<ScenarioBO> scenarios, List<EventBO> events) {
         this.idCompanyUser = idCompanyUser;
         this.username = username;
         this.password = password;
@@ -41,6 +44,9 @@ public class CompanyUserBO {
         this.address = address;
         this.postalCode = postalCode;
         this.phone = phone;
+        this.title = title;
+        this.description = description;
+        this.image = image;
         this.scenarios = scenarios;
         this.events = events;
     }
@@ -166,6 +172,33 @@ public class CompanyUserBO {
 
     public void setPhone(Integer phone) {
         this.phone = phone;
+    }
+
+    @Column(name = "title")
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    @Column(name = "description")
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    @Column(name = "image")
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     @OneToMany(mappedBy = "idCompany", cascade=CascadeType.PERSIST)

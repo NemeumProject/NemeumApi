@@ -9,8 +9,6 @@ public class EventDTO {
 
     private Integer idEvent;
     private Integer idCompanyUser;
-    private Integer idIndividualUser;
-    private Integer idTrainerUser;
     private Integer idSport;
     private Boolean indoor;
     private Integer capacity;
@@ -22,17 +20,13 @@ public class EventDTO {
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd hh:mm:ss")
     private Date dateEvent;
     private String description;
+    private String title;
+    private String image;
 
     public EventDTO(EventBO bo) {
         this.idEvent = bo.getIdEvent();
         if(bo.getCompanyUser() != null){
             this.idCompanyUser = bo.getCompanyUser().getIdCompanyUser();
-        }
-        if(bo.getIndividualUser() != null){
-            this.idIndividualUser = bo.getIndividualUser().getIdIndividualUser();
-        }
-        if(bo.getTrainerUser() != null){
-            this.idTrainerUser = bo.getTrainerUser().getIdTrainerUser();
         }
         this.idSport = bo.getSport().getIdSport();
         this.indoor = bo.getIndoor();
@@ -44,6 +38,8 @@ public class EventDTO {
         this.phone = bo.getPhone();
         this.dateEvent = bo.getDateEvent();
         this.description = bo.getDescription();
+        this.title = bo.getTitle();
+        this.image = bo.getImage();
     }
 
     public EventDTO(){
@@ -64,22 +60,6 @@ public class EventDTO {
 
     public void setIdCompanyUser(Integer idCompanyUser) {
         this.idCompanyUser = idCompanyUser;
-    }
-
-    public Integer getIdIndividualUser() {
-        return idIndividualUser;
-    }
-
-    public void setIdIndividualUser(Integer idIndividualUser) {
-        this.idIndividualUser = idIndividualUser;
-    }
-
-    public Integer getIdTrainerUser() {
-        return idTrainerUser;
-    }
-
-    public void setIdTrainerUser(Integer idTrainerUser) {
-        this.idTrainerUser = idTrainerUser;
     }
 
     public Integer getIdSport() {
@@ -160,5 +140,21 @@ public class EventDTO {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

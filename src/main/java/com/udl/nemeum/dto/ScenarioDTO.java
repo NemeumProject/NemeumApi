@@ -16,6 +16,9 @@ public class ScenarioDTO {
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd hh:mm:ss")
     private Date dateScenario;
     private String description;
+    private String title;
+    private String image;
+    private String address;
 
     public ScenarioDTO(ScenarioBO bo) {
         this.idScenario = bo.getIdScenario();
@@ -26,6 +29,9 @@ public class ScenarioDTO {
         this.idCompany = bo.getIdCompany().getIdCompanyUser();
         this.dateScenario = bo.getDateScenario();
         this.description = bo.getDescription();
+        this.title = bo.getTitle();
+        this.image = bo.getImage();
+        this.address = bo.getAddress();
     }
 
     public ScenarioDTO(){
@@ -93,5 +99,29 @@ public class ScenarioDTO {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 }

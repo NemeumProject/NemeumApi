@@ -50,16 +50,9 @@ public class EventService {
 
     private EventBO toBO(EventDTO dto){
         EventBO bo = new EventBO();
-        if(dto.getIdCompanyUser() != null){
-            bo.setIndividualUser(individualUserRepository.findByidIndividualUser(dto.getIdIndividualUser()));
-        }
 
         if(dto.getIdCompanyUser() != null){
             bo.setCompanyUser(companyUserRepository.findByidCompanyUser(dto.getIdCompanyUser()));
-        }
-
-        if(dto.getIdTrainerUser() != null){
-            bo.setTrainerUser(trainerUserRepository.findByidTrainerUser(dto.getIdTrainerUser()));
         }
 
         bo.setSport(sportRepository.findByidSport(dto.getIdSport()));

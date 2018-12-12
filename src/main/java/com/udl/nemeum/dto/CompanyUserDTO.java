@@ -21,6 +21,9 @@ public class CompanyUserDTO {
     private String address;
     private String postalCode;
     private Integer phone;
+    private String title;
+    private String description;
+    private String image;
     private List<ScenarioBO> scenarios = new ArrayList<>();
 
     public CompanyUserDTO(CompanyUserBO bo) {
@@ -37,6 +40,9 @@ public class CompanyUserDTO {
         this.address = bo.getAddress();
         this.postalCode = bo.getPostalCode();
         this.phone = bo.getPhone();
+        this.title = bo.getTitle();
+        this.description = bo.getDescription();
+        this.image = bo.getImage();
         if(bo.getScenarios() != null){
             this.scenarios = bo.getScenarios();
         }
@@ -149,6 +155,30 @@ public class CompanyUserDTO {
 
     public void setPhone(Integer phone) {
         this.phone = phone;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public List<ScenarioBO> getScenarios() {
