@@ -22,12 +22,12 @@ public class LoginController {
     @RequestMapping(method = RequestMethod.POST)
     ResponseEntity<?> add(UriComponentsBuilder ucBuilder, @RequestBody LoginDTO input) {
 
-        if(loginService.login(input).equals("Individual")) {
-            return new ResponseEntity<String>("Individual", HttpStatus.OK);
-        }else if(loginService.login(input).equals("Company")) {
-            return new ResponseEntity<String>("Company", HttpStatus.OK);
-        }else if(loginService.login(input).equals("Trainer")){
-            return new ResponseEntity<String>("Trainer", HttpStatus.OK);
+        if(loginService.login(input).contains("Individual")) {
+            return new ResponseEntity<String>(loginService.login(input), HttpStatus.OK);
+        }else if(loginService.login(input).contains("Company")) {
+            return new ResponseEntity<String>(loginService.login(input), HttpStatus.OK);
+        }else if(loginService.login(input).contains("Trainer")){
+            return new ResponseEntity<String>(loginService.login(input), HttpStatus.OK);
         }else{
             return new ResponseEntity<String>("", HttpStatus.UNAUTHORIZED);
         }
