@@ -29,17 +29,17 @@ public class LoginService {
         if(individualUserRepository.findByemail(dto.getEmail()) != null){
             IndividualUserBO currentUser = individualUserRepository.findByemail(dto.getEmail());
             if(dto.getPassword().equals(currentUser.getPassword())){
-                login = "Individual" + "-" + currentUser.getIdIndividualUser().toString();
+                login = "Individual" + "-" + currentUser.getFirstName();
             }
         }else if(trainerUserRepository.findByemail(dto.getEmail()) != null){
             TrainerUserBO currentUser = trainerUserRepository.findByemail(dto.getEmail());
             if(dto.getPassword().equals(currentUser.getPassword())){
-                login = "Trainer" + "-" + currentUser.getIdTrainerUser().toString();
+                login = "Trainer" + "-" + currentUser.getFirstName();
             }
         }else if(companyUserRepository.findByemail(dto.getEmail()) != null){
             CompanyUserBO currentUser = companyUserRepository.findByemail(dto.getEmail());
             if(dto.getPassword().equals(currentUser.getPassword())){
-                login = "Company" + "-" + currentUser.getIdCompanyUser().toString();
+                login = "Company" + "-" + currentUser.getCompanyName();
             }
         }
         return login;
