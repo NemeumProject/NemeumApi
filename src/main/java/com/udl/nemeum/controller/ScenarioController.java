@@ -1,7 +1,9 @@
 package com.udl.nemeum.controller;
 
+import com.udl.nemeum.dto.CompanyUserDTO;
 import com.udl.nemeum.dto.ScenarioDTO;
 import com.udl.nemeum.models.ScenarioBO;
+import com.udl.nemeum.services.CompanyUserService;
 import com.udl.nemeum.services.ScenarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -20,6 +22,9 @@ public class ScenarioController {
 
     @Autowired
     private ScenarioService scenarioService;
+
+    @Autowired
+    private CompanyUserService companyUserService;
 
     @RequestMapping(value = "/list", method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<List<ScenarioDTO>> getAllScenarios() throws IOException {
@@ -50,5 +55,11 @@ public class ScenarioController {
 
         return scenarioService.modifyScenario(input);
 
+    }
+
+    @RequestMapping(value = "/company/{idCompany}", method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE})
+    public List<ScenarioDTO> getScenariosOfCompany(@PathVariable("idCompany") Integer id){
+
+        return scenarioService.getScenariosByCompany(id);
     }
 }

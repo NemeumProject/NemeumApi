@@ -1,6 +1,8 @@
 package com.udl.nemeum.services;
 
+import com.udl.nemeum.dto.CompanyUserDTO;
 import com.udl.nemeum.dto.ScenarioDTO;
+import com.udl.nemeum.models.CompanyUserBO;
 import com.udl.nemeum.models.ScenarioBO;
 import com.udl.nemeum.repository.CompanyUserRepository;
 import com.udl.nemeum.repository.ScenarioRepository;
@@ -78,5 +80,10 @@ public class ScenarioService {
         ScenarioBO resultScenario = scenarioRepository.save(scenario);
 
         return new ScenarioDTO(resultScenario);
+    }
+
+    public List<ScenarioDTO> getScenariosByCompany(Integer id){
+        CompanyUserBO user = companyUserRepository.findByidCompanyUser(id);
+        return toDTO(user.getScenarios());
     }
 }
