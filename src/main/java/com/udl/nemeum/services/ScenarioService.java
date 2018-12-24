@@ -1,12 +1,14 @@
 package com.udl.nemeum.services;
 
-import com.udl.nemeum.dto.CompanyUserDTO;
+import com.udl.nemeum.dto.FilterScenarioDTO;
 import com.udl.nemeum.dto.ScenarioDTO;
 import com.udl.nemeum.models.CompanyUserBO;
 import com.udl.nemeum.models.ScenarioBO;
-import com.udl.nemeum.repository.CompanyUserRepository;
+import com.udl.nemeum.models.SportBO;
 import com.udl.nemeum.repository.ScenarioRepository;
+import com.udl.nemeum.repository.ScenarioRepositoryImpl;
 import com.udl.nemeum.repository.SportRepository;
+import com.udl.nemeum.repository.CompanyUserRepository;
 import com.udl.nemeum.repository.UserScenarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -19,6 +21,9 @@ public class ScenarioService {
 
     @Autowired
     private ScenarioRepository scenarioRepository;
+
+    @Autowired
+    private ScenarioRepositoryImpl scenarioRepositoryImpl;
 
     @Autowired
     private CompanyUserRepository companyUserRepository;
@@ -85,5 +90,23 @@ public class ScenarioService {
     public List<ScenarioDTO> getScenariosByCompany(Integer id){
         CompanyUserBO user = companyUserRepository.findByidCompanyUser(id);
         return toDTO(user.getScenarios());
+    }
+
+    public List<ScenarioDTO> getScenarioWithFilter(FilterScenarioDTO filter){
+        String city = null;
+        Double price = null;
+        SportBO sport = null;
+        if(filter.getCity() != null){
+            city = filter.getCity();
+        }
+        if(filter.getIdSport() != null){
+            sport = sportRepository.findByidSport(filter.getIdSport());
+        }
+        if(filter.getPrice() != null){
+            price = filter.getPrice();
+        }
+        List<ScenarioBO> listScenario = scenarioRepositoryImpl.findScenarioByFilter(sport, price, city);
+
+        return toDTO(listScenario);
     }
 }

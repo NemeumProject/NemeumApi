@@ -16,14 +16,20 @@ public class UserScenarioDTO {
     private Date startScenario;
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd hh:mm:ss")
     private Date endScenario;
+    private Integer phone;
+    private String email;
 
     public UserScenarioDTO(UserScenarioBO bo) {
         this.userScenario = bo.getUserScenario();
-        this.idUser = bo.getUserBO().getIdIndividualUser();
+        if(bo.getUserBO() != null && bo.getUserBO().getIdIndividualUser() != null){
+            this.idUser = bo.getUserBO().getIdIndividualUser();
+        }
         this.idScenario = bo.getScenarioBO().getIdScenario();
         this.dateBooking = bo.getDateBooking();
         this.startScenario = bo.getStartScenario();
         this.endScenario = bo.getEndScenario();
+        this.phone = bo.getPhone();
+        this.email = bo.getEmail();
     }
 
     public UserScenarioDTO(){
@@ -76,5 +82,21 @@ public class UserScenarioDTO {
 
     public void setEndScenario(Date endScenario) {
         this.endScenario = endScenario;
+    }
+
+    public Integer getPhone() {
+        return phone;
+    }
+
+    public void setPhone(Integer phone) {
+        this.phone = phone;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

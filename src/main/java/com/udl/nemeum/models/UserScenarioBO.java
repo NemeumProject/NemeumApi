@@ -18,14 +18,18 @@ public class UserScenarioBO {
     private Date startScenario;
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd hh:mm:ss")
     private Date endScenario;
+    private Integer phone;
+    private String email;
 
-    public UserScenarioBO(Integer userScenario, IndividualUserBO userBO, ScenarioBO scenarioBO, Date dateBooking, Date startScenario, Date endScenario) {
+    public UserScenarioBO(Integer userScenario, IndividualUserBO userBO, ScenarioBO scenarioBO, Date dateBooking, Date startScenario, Date endScenario, Integer phone, String email) {
         this.userScenario = userScenario;
         this.userBO = userBO;
         this.scenarioBO = scenarioBO;
         this.dateBooking = dateBooking;
         this.startScenario = startScenario;
         this.endScenario = endScenario;
+        this.phone = phone;
+        this.email = email;
     }
 
     public UserScenarioBO(){
@@ -88,5 +92,23 @@ public class UserScenarioBO {
 
     public void setEndScenario(Date endScenario) {
         this.endScenario = endScenario;
+    }
+
+    @Column(name = "phone")
+    public Integer getPhone() {
+        return phone;
+    }
+
+    public void setPhone(Integer phone) {
+        this.phone = phone;
+    }
+
+    @Column(name = "email")
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }

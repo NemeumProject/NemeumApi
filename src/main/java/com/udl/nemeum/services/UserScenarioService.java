@@ -24,7 +24,14 @@ public class UserScenarioService {
         UserScenarioBO userScenarioBO = new UserScenarioBO();
 
         userScenarioBO.setScenarioBO(scenarioRepository.findByidScenario(dto.getIdScenario()));
-        userScenarioBO.setUserBO(individualUserRepository.findByidIndividualUser(dto.getIdUser()));
+        if(dto.getIdUser() != null){
+            userScenarioBO.setUserBO(individualUserRepository.findByidIndividualUser(dto.getIdUser()));
+        }
+        userScenarioBO.setDateBooking(dto.getDateBooking());
+        userScenarioBO.setEmail(dto.getEmail());
+        userScenarioBO.setPhone(dto.getPhone());
+        userScenarioBO.setEndScenario(dto.getEndScenario());
+        userScenarioBO.setStartScenario(dto.getStartScenario());
 
         return new UserScenarioDTO(userScenarioRepository.save(userScenarioBO));
     }
