@@ -1,6 +1,7 @@
 package com.udl.nemeum.controller;
 
 import com.udl.nemeum.dto.CompanyUserDTO;
+import com.udl.nemeum.dto.FilterScenarioByFacilityDTO;
 import com.udl.nemeum.dto.FilterScenarioDTO;
 import com.udl.nemeum.dto.ScenarioDTO;
 import com.udl.nemeum.models.ScenarioBO;
@@ -62,6 +63,13 @@ public class ScenarioController {
     public List<ScenarioDTO> search(UriComponentsBuilder ucBuilder, @RequestBody FilterScenarioDTO input) {
 
         return scenarioService.getScenarioWithFilter(input);
+
+    }
+
+    @RequestMapping(value = "/search/facility", method = RequestMethod.POST, produces = { MediaType.APPLICATION_JSON_VALUE})
+    public List<ScenarioDTO> searchByFacility(UriComponentsBuilder ucBuilder, @RequestBody FilterScenarioByFacilityDTO input) {
+
+        return scenarioService.getScenarioWithFilterFacility(input);
 
     }
 
