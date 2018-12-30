@@ -1,5 +1,6 @@
 package com.udl.nemeum.services;
 
+import com.udl.nemeum.dto.FilterScenarioByFacilityDTO;
 import com.udl.nemeum.dto.FilterScenarioDTO;
 import com.udl.nemeum.dto.ScenarioDTO;
 import com.udl.nemeum.models.CompanyUserBO;
@@ -106,6 +107,28 @@ public class ScenarioService {
             price = filter.getPrice();
         }
         List<ScenarioBO> listScenario = scenarioRepositoryImpl.findScenarioByFilter(sport, price, city);
+
+        return toDTO(listScenario);
+    }
+
+    public List<ScenarioDTO> getScenarioWithFilterFacility(FilterScenarioByFacilityDTO filter){
+        String city = null;
+        Double price = null;
+        SportBO sport = null;
+        CompanyUserBO company = null;
+        if(filter.getCity() != null){
+            city = filter.getCity();
+        }
+        if(filter.getIdSport() != null){
+            sport = sportRepository.findByidSport(filter.getIdSport());
+        }
+        if(filter.getIdCompany() != null){
+            company = companyUserRepository.findByidCompanyUser(filter.getIdCompany());
+        }
+        if(filter.getPrice() != null){
+            price = filter.getPrice();
+        }
+        List<ScenarioBO> listScenario = scenarioRepositoryImpl.findScenarioByFacilityFilter(sport, price, city, company);
 
         return toDTO(listScenario);
     }
