@@ -76,11 +76,11 @@ public class TrainerUserService {
 
     }
 
-    public List<TrainerUserDTO> getTrainersBySport(Integer idSport){
+    /*public List<TrainerUserDTO> getTrainersBySport(Integer idSport){
         List<TrainerUserBO> trainerUserBOList = trainerUserRepository.findTrainersBySport(idSport);
 
         return toDTO(trainerUserBOList);
-    }
+    }*/
 
     public TrainerUserBO toBO(TrainerUserDTO dto){
         TrainerUserBO trainerUserBO = new TrainerUserBO();

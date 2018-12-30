@@ -59,8 +59,8 @@ public class TrainerUserController {
 
     }
 
-    @RequestMapping(value = "/sport/{idSport}", method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE})
+    /*@RequestMapping(value = "/sport/{idSport}", method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE})
     public List<TrainerUserDTO> getUsersBySport(@PathVariable("idSport") Integer id) {
         return trainerUserService.getTrainersBySport(id);
-    }
+    }*/
 }

@@ -86,7 +86,7 @@ public class SportBO {
         this.users = users;
     }
 
-    @OneToMany(mappedBy = "sportTrainer", cascade=CascadeType.PERSIST)
+    @OneToMany(mappedBy = "id_sport_training_type", cascade=CascadeType.PERSIST)
     @JsonIdentityReference(alwaysAsId = true)
     @JsonIgnore
     public List<TrainerSportBO> getTrainers() {

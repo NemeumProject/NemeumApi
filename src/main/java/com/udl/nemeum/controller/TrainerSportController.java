@@ -26,9 +26,9 @@ public class TrainerSportController {
 
     }
 
-    @RequestMapping(method = RequestMethod.DELETE)
+    /*@RequestMapping(method = RequestMethod.DELETE)
     @Transactional
     public void deleteTrainerSport(UriComponentsBuilder ucBuilder, @RequestBody TrainerSportDTO input) {
-        trainerSportService.deleteTeamUser(input.getIdTrainer(), input.getIdSport());
-    }
+        trainerSportService.deleteTeamUser(input.getId_trainer_user(), input.getId_sport_training_type());
+    }*/
 }

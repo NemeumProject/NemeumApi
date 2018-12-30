@@ -1,64 +1,122 @@
 package com.udl.nemeum.models;
 
 import javax.persistence.*;
+import java.sql.Time;
+import java.util.Date;
 
 @Entity
 @Table(name = "trainer_sport", schema = "nemeum")
 public class TrainerSportBO {
 
-    private Integer idTrainerSport;
-    private TrainerUserBO trainer;
-    private SportBO sportTrainer;
-    private String experience;
+    private Integer id_training_service_post;
+    private TrainerUserBO id_trainer_user;
+    private SportBO id_sport_training_type;
+    private String training_address;
+    private Double training_price;
+    private String training_city;
+    private Time training_start;
+    private Time training_end;
+    private String training_desc;
 
-    public TrainerSportBO(Integer idTrainerSport, TrainerUserBO trainer, SportBO sportTrainer, String experience) {
-        this.idTrainerSport = idTrainerSport;
-        this.trainer = trainer;
-        this.sportTrainer = sportTrainer;
-        this.experience = experience;
+    public TrainerSportBO(Integer id_training_service_post, TrainerUserBO id_trainer_user, SportBO id_sport_training_type, String training_address, Double training_price, String training_city, Time training_start, Time training_end, String training_desc) {
+        this.id_training_service_post = id_training_service_post;
+        this.id_trainer_user = id_trainer_user;
+        this.id_sport_training_type = id_sport_training_type;
+        this.training_address = training_address;
+        this.training_price = training_price;
+        this.training_city = training_city;
+        this.training_start = training_start;
+        this.training_end = training_end;
+        this.training_desc = training_desc;
     }
 
-    public TrainerSportBO(){
+    public TrainerSportBO() {
         super();
     }
 
     @Id
-    @Column(name = "id_trainer_sport")
+    @Column(name = "id_training_service_post")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Integer getIdTrainerSport() {
-        return idTrainerSport;
+    public Integer getId_training_service_post() {
+        return id_training_service_post;
     }
 
-    public void setIdTrainerSport(Integer idTrainerSport) {
-        this.idTrainerSport = idTrainerSport;
-    }
-
-    @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "id_trainer", referencedColumnName = "id_trainer")
-    public TrainerUserBO getTrainer() {
-        return trainer;
-    }
-
-    public void setTrainer(TrainerUserBO trainer) {
-        this.trainer = trainer;
+    public void setId_training_service_post(Integer id_training_service_post) {
+        this.id_training_service_post = id_training_service_post;
     }
 
     @ManyToOne(cascade = CascadeType.PERSIST)
-    @JoinColumn(name = "id_sport", referencedColumnName = "id_sport")
-    public SportBO getSportTrainer() {
-        return sportTrainer;
+    @JoinColumn(name = "id_trainer_user", referencedColumnName = "id_trainer")
+    public TrainerUserBO getId_trainer_user() {
+        return id_trainer_user;
     }
 
-    public void setSportTrainer(SportBO sportTrainer) {
-        this.sportTrainer = sportTrainer;
+
+    public void setId_trainer_user(TrainerUserBO id_trainer_user) {
+        this.id_trainer_user = id_trainer_user;
     }
 
-    @Column(name = "experience")
-    public String getExperience() {
-        return experience;
+    @ManyToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "id_sport_training_type", referencedColumnName = "id_sport")
+    public SportBO getId_sport_training_type() {
+        return id_sport_training_type;
     }
 
-    public void setExperience(String experience) {
-        this.experience = experience;
+    public void setId_sport_training_type(SportBO id_sport_training_type) {
+        this.id_sport_training_type = id_sport_training_type;
+    }
+
+    @Column(name = "training_address")
+    public String getTraining_address() {
+        return training_address;
+    }
+
+    public void setTraining_address(String training_address) {
+        this.training_address = training_address;
+    }
+
+    @Column(name = "training_price")
+    public Double getTraining_price() {
+        return training_price;
+    }
+
+    public void setTraining_price(Double training_price) {
+        this.training_price = training_price;
+    }
+
+    @Column(name = "training_city")
+    public String getTraining_city() {
+        return training_city;
+    }
+
+    public void setTraining_city(String training_city) {
+        this.training_city = training_city;
+    }
+
+    @Column(name = "training_start")
+    public Time getTraining_start() {
+        return training_start;
+    }
+
+    public void setTraining_start(Time training_start) {
+        this.training_start = training_start;
+    }
+
+    @Column(name = "training_end")
+    public Time getTraining_end() {
+        return training_end;
+    }
+
+    public void setTraining_end(Time training_end) {
+        this.training_end = training_end;
+    }
+
+    @Column(name = "training_desc")
+    public String getTraining_desc() {
+        return training_desc;
+    }
+
+    public void setTraining_desc(String training_desc) {
+        this.training_desc = training_desc;
     }
 }

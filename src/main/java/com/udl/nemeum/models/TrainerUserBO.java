@@ -212,7 +212,7 @@ public class TrainerUserBO {
         this.image = image;
     }
 
-    @OneToMany(mappedBy = "trainer", cascade=CascadeType.PERSIST)
+    @OneToMany(mappedBy = "id_trainer_user", cascade=CascadeType.PERSIST)
     @JsonIdentityReference(alwaysAsId = true)
     @JsonIgnore
     public List<TrainerSportBO> getTrainerSportBOList() {
