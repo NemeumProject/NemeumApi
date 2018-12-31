@@ -26,6 +26,13 @@ public class TrainerSportController {
 
     }
 
+    @RequestMapping(method = RequestMethod.PUT, produces = { MediaType.APPLICATION_JSON_VALUE})
+    public TrainerSportDTO modify(UriComponentsBuilder ucBuilder, @RequestBody TrainerSportDTO input) {
+
+        return trainerSportService.modify(input);
+
+    }
+
     /*@RequestMapping(method = RequestMethod.DELETE)
     @Transactional
     public void deleteTrainerSport(UriComponentsBuilder ucBuilder, @RequestBody TrainerSportDTO input) {

@@ -24,7 +24,7 @@ public class TrainerSportDTO {
     }
 
     public TrainerSportDTO(TrainerSportBO BO) {
-        this.id_training_service_post = BO.getId_training_service_post();
+        this.id_training_service_post = BO.getIdTrainingServicePost();
         this.id_trainer_user = BO.getId_trainer_user().getIdTrainerUser();
         this.id_sport_training_type = BO.getId_sport_training_type().getIdSport();
         this.training_address = BO.getTraining_address();

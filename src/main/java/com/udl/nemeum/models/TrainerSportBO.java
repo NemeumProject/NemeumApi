@@ -8,7 +8,7 @@ import java.util.Date;
 @Table(name = "trainer_sport", schema = "nemeum")
 public class TrainerSportBO {
 
-    private Integer id_training_service_post;
+    private Integer idTrainingServicePost;
     private TrainerUserBO id_trainer_user;
     private SportBO id_sport_training_type;
     private String training_address;
@@ -18,8 +18,8 @@ public class TrainerSportBO {
     private Time training_end;
     private String training_desc;
 
-    public TrainerSportBO(Integer id_training_service_post, TrainerUserBO id_trainer_user, SportBO id_sport_training_type, String training_address, Double training_price, String training_city, Time training_start, Time training_end, String training_desc) {
-        this.id_training_service_post = id_training_service_post;
+    public TrainerSportBO(Integer idTrainingServicePost, TrainerUserBO id_trainer_user, SportBO id_sport_training_type, String training_address, Double training_price, String training_city, Time training_start, Time training_end, String training_desc) {
+        this.idTrainingServicePost = idTrainingServicePost;
         this.id_trainer_user = id_trainer_user;
         this.id_sport_training_type = id_sport_training_type;
         this.training_address = training_address;
@@ -37,12 +37,12 @@ public class TrainerSportBO {
     @Id
     @Column(name = "id_training_service_post")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    public Integer getId_training_service_post() {
-        return id_training_service_post;
+    public Integer getIdTrainingServicePost() {
+        return idTrainingServicePost;
     }
 
-    public void setId_training_service_post(Integer id_training_service_post) {
-        this.id_training_service_post = id_training_service_post;
+    public void setIdTrainingServicePost(Integer idTrainingServicePost) {
+        this.idTrainingServicePost = idTrainingServicePost;
     }
 
     @ManyToOne(cascade = CascadeType.PERSIST)

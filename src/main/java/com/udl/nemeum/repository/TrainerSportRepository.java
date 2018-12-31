@@ -7,9 +7,9 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface TrainerSportRepository extends JpaRepository<TrainerSportBO, Integer> {
-    //TrainerSportBO findByid_training_service_post(Integer id);
+    TrainerSportBO findByidTrainingServicePost(Integer id);
     List<TrainerSportBO> findAll();
     void deleteById(Integer id);
-   // @Query("FROM TrainerSportBO where id_trainer = :trainer and id_sport = :sport")
-    //TrainerSportBO findTrainerSport(Integer trainer, Integer sport);
+    @Query("FROM TrainerSportBO where id_trainer = :trainer and id_sport = :sport")
+    TrainerSportBO findTrainerSport(Integer trainer, Integer sport);
 }
