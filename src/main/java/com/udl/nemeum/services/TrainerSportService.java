@@ -8,6 +8,9 @@ import com.udl.nemeum.repository.TrainerUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service("trainerSportService")
 public class TrainerSportService {
 
@@ -77,5 +80,19 @@ public class TrainerSportService {
         TrainerSportBO finalTrainerSport = trainerSportRepository.save(trainerSportBO);
 
         return new TrainerSportDTO(finalTrainerSport);
+    }
+
+    public List<TrainerSportDTO> findAll() {
+        List<TrainerSportBO> trainerSportBOList = trainerSportRepository.findAll();
+        return toDTO(trainerSportBOList);
+    }
+
+    public List<TrainerSportDTO> toDTO(List<TrainerSportBO> trainerSportBOList){
+        List<TrainerSportDTO> trainerSportDTOList = new ArrayList<>();
+        for(TrainerSportBO trainerSportBO : trainerSportBOList){
+            trainerSportDTOList.add(new TrainerSportDTO(trainerSportBO));
+        }
+
+        return trainerSportDTOList;
     }
 }
