@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface TrainerUserRepository extends JpaRepository<TrainerUserBO, Integer> {
     TrainerUserBO findByidTrainerUser(Integer id);
-    TrainerUserBO findByusername(String id);
+    TrainerUserBO findByfirstName(String id);
     TrainerUserBO findByemail(String id);
     void deleteById(Integer id);
     List<TrainerUserBO> findAll();

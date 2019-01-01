@@ -1,6 +1,8 @@
 package com.udl.nemeum.controller;
 
+import com.udl.nemeum.dto.FilterTrainerServiceDTO;
 import com.udl.nemeum.dto.TrainerSportDTO;
+import com.udl.nemeum.dto.TrainerUserDTO;
 import com.udl.nemeum.services.TrainerSportService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -41,6 +43,13 @@ public class TrainerSportController {
     public TrainerSportDTO modify(UriComponentsBuilder ucBuilder, @RequestBody TrainerSportDTO input) {
 
         return trainerSportService.modify(input);
+
+    }
+
+    @RequestMapping(value = "/search", method = RequestMethod.POST, produces = { MediaType.APPLICATION_JSON_VALUE})
+    public List<TrainerSportDTO> search(UriComponentsBuilder ucBuilder, @RequestBody FilterTrainerServiceDTO input) {
+
+        return trainerSportService.filter(input);
 
     }
 

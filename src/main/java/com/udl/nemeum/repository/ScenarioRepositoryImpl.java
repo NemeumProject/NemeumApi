@@ -20,35 +20,31 @@ public class ScenarioRepositoryImpl implements ScenarioRepositoryCustom {
 
     @Override
     public List<ScenarioBO> findScenarioByFilter(SportBO sport, Double price, String city) {
-        String query = null;
+        String query = "SELECT * FROM scenario ";
         Integer sport_id = null;
         if(sport != null){
             sport_id = sport.getIdSport();
         }
 
         if(sport_id != null && price != null && city != null){
-            query = "SELECT * FROM scenario WHERE sport_id = " + sport_id + " AND price <=" + price + " AND address LIKE " + "'%" + city + "%';";
+            query += "WHERE sport_id = " + sport_id + " AND price <=" + price + " AND address LIKE " + "'%" + city + "%';";
         }else if(sport_id != null && price != null && city == null) {
-            query = "SELECT * FROM scenario WHERE sport_id = " + sport_id + " AND price <=" + price + ";";
+            query += "WHERE sport_id = " + sport_id + " AND price <=" + price + ";";
         }else if(sport_id != null && price == null && city != null){
-            query = "SELECT * FROM scenario WHERE sport_id = " + sport_id + " AND address LIKE " + "'%" + city + "%';";
+            query += "WHERE sport_id = " + sport_id + " AND address LIKE " + "'%" + city + "%';";
         }else if(sport_id != null && price == null && city == null){
-            query = "SELECT * FROM scenario WHERE sport_id = " + sport_id + ";";
+            query += "WHERE sport_id = " + sport_id + ";";
         }else if(sport_id == null && price != null && city != null){
-            query = "SELECT * FROM scenario WHERE price <=" + price + " AND address LIKE " + "'%" + city + "%';";
+            query += "WHERE price <=" + price + " AND address LIKE " + "'%" + city + "%';";
         }else if(sport_id == null && price != null && city == null){
-            query = "SELECT * FROM scenario WHERE  price <=" + price + ";";
+            query += "WHERE  price <=" + price + ";";
         }else if(sport_id == null && price == null && city != null){
-            query = "SELECT * FROM scenario WHERE address LIKE " + "'%" + city + "%';";
+            query += "WHERE address LIKE " + "'%" + city + "%';";
         }
+        Query q = entityManager.createNativeQuery(query, ScenarioBO.class);
 
-        if(query == null){
-            return new ArrayList<ScenarioBO>();
-        }else{
-            Query q = entityManager.createNativeQuery(query, ScenarioBO.class);
+        return q.getResultList();
 
-            return q.getResultList();
-        }
     }
 
     @Override

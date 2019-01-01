@@ -11,6 +11,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.transaction.Transactional;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -33,8 +34,10 @@ public class SportController {
     }
 
     @RequestMapping(value = "/{idSport}", method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE})
-    public SportDTO getSport(@PathVariable("idSport") Integer id){
-        return sportService.getSport(id);
+    public ResponseEntity<List<SportDTO>> getSport(@PathVariable("idSport") Integer id){
+        List<SportDTO> sport = new ArrayList<>();
+        sport.add(sportService.getSport(id));
+        return new ResponseEntity<List<SportDTO>>(sport, HttpStatus.OK);
     }
 
     @RequestMapping(method = RequestMethod.POST, produces = { MediaType.APPLICATION_JSON_VALUE})

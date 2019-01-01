@@ -1,9 +1,13 @@
 package com.udl.nemeum.services;
 
+import com.udl.nemeum.dto.FilterTrainerServiceDTO;
 import com.udl.nemeum.dto.TrainerSportDTO;
+import com.udl.nemeum.models.SportBO;
 import com.udl.nemeum.models.TrainerSportBO;
+import com.udl.nemeum.models.TrainerUserBO;
 import com.udl.nemeum.repository.SportRepository;
 import com.udl.nemeum.repository.TrainerSportRepository;
+import com.udl.nemeum.repository.TrainerSportRepositoryImpl;
 import com.udl.nemeum.repository.TrainerUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,6 +26,9 @@ public class TrainerSportService {
 
     @Autowired
     private TrainerUserRepository trainerUserRepository;
+
+    @Autowired
+    private TrainerSportRepositoryImpl trainerSportRepositoryImpl;
 
     public TrainerSportDTO add(TrainerSportDTO dto){
         TrainerSportBO trainerSportBO = new TrainerSportBO();
@@ -85,6 +92,33 @@ public class TrainerSportService {
     public List<TrainerSportDTO> findAll() {
         List<TrainerSportBO> trainerSportBOList = trainerSportRepository.findAll();
         return toDTO(trainerSportBOList);
+    }
+
+    public List<TrainerSportDTO> filter(FilterTrainerServiceDTO filter){
+        String trainer = null;
+        String city = null;
+        Double price = null;
+        Integer sport = null;
+
+        if(filter.getName() != null){
+            trainer = filter.getName();
+        }
+
+        if(filter.getCity() != null){
+            city = filter.getCity();
+        }
+
+        if(filter.getPrice() != null){
+            price = filter.getPrice();
+        }
+
+        if(filter.getSport_id() != null){
+            sport = filter.getSport_id();
+        }
+
+        List<TrainerSportBO> trainerService = trainerSportRepositoryImpl.filter(trainer, city, price, sport);
+
+        return toDTO(trainerService);
     }
 
     public List<TrainerSportDTO> toDTO(List<TrainerSportBO> trainerSportBOList){
