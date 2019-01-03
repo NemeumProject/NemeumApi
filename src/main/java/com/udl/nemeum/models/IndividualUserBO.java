@@ -34,8 +34,9 @@ public class IndividualUserBO {
     private List<UserScenarioBO> scenarios = new ArrayList<>();
     private List<TeamUserBO> teams = new ArrayList<>();
     private List<UserSportBO> sports = new ArrayList<>();
+    private List<BookingTrainerBO> bookingTrainerBOList = new ArrayList<>();
 
-    public IndividualUserBO(Integer idIndividualUser, String username, String password, Boolean isPremium, String firstName, String middleSurname, String lastSurname, String ssn, String email, Boolean freeTraining, Boolean freeFacility, Integer rentedHours, Integer trainedHours, String city, String address, String postalCode, Integer phone, String description, String title, String image, List<UserScenarioBO> scenarios, List<TeamUserBO> teams, List<UserSportBO> sports) {
+    public IndividualUserBO(Integer idIndividualUser, String username, String password, Boolean isPremium, String firstName, String middleSurname, String lastSurname, String ssn, String email, Boolean freeTraining, Boolean freeFacility, Integer rentedHours, Integer trainedHours, String city, String address, String postalCode, Integer phone, String description, String title, String image, List<UserScenarioBO> scenarios, List<TeamUserBO> teams, List<UserSportBO> sports, List<BookingTrainerBO> bookingTrainerBOList) {
         this.idIndividualUser = idIndividualUser;
         this.username = username;
         this.password = password;
@@ -59,6 +60,7 @@ public class IndividualUserBO {
         this.scenarios = scenarios;
         this.teams = teams;
         this.sports = sports;
+        this.bookingTrainerBOList = bookingTrainerBOList;
     }
 
     public IndividualUserBO(){
@@ -277,5 +279,16 @@ public class IndividualUserBO {
 
     public void setSports(List<UserSportBO> sports) {
         this.sports = sports;
+    }
+
+    @OneToMany(mappedBy = "idUser", cascade=CascadeType.PERSIST)
+    @JsonIdentityReference(alwaysAsId = true)
+    @JsonIgnore
+    public List<BookingTrainerBO> getBookingTrainerBOList() {
+        return bookingTrainerBOList;
+    }
+
+    public void setBookingTrainerBOList(List<BookingTrainerBO> bookingTrainerBOList) {
+        this.bookingTrainerBOList = bookingTrainerBOList;
     }
 }

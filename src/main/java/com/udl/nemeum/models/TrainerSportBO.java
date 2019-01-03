@@ -1,8 +1,13 @@
 package com.udl.nemeum.models;
 
+import com.fasterxml.jackson.annotation.JsonIdentityReference;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.sql.Time;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "trainer_sport", schema = "nemeum")
@@ -17,8 +22,10 @@ public class TrainerSportBO {
     private Time training_start;
     private Time training_end;
     private String training_desc;
+    private List<BookingTrainerBO> bookingTrainerBOList = new ArrayList<>();
 
-    public TrainerSportBO(Integer idTrainingServicePost, TrainerUserBO id_trainer_user, SportBO id_sport_training_type, String training_address, Double training_price, String training_city, Time training_start, Time training_end, String training_desc) {
+
+    public TrainerSportBO(Integer idTrainingServicePost, TrainerUserBO id_trainer_user, SportBO id_sport_training_type, String training_address, Double training_price, String training_city, Time training_start, Time training_end, String training_desc, List<BookingTrainerBO> bookingTrainerBOList) {
         this.idTrainingServicePost = idTrainingServicePost;
         this.id_trainer_user = id_trainer_user;
         this.id_sport_training_type = id_sport_training_type;
@@ -28,6 +35,7 @@ public class TrainerSportBO {
         this.training_start = training_start;
         this.training_end = training_end;
         this.training_desc = training_desc;
+        this.bookingTrainerBOList = bookingTrainerBOList;
     }
 
     public TrainerSportBO() {
@@ -118,5 +126,16 @@ public class TrainerSportBO {
 
     public void setTraining_desc(String training_desc) {
         this.training_desc = training_desc;
+    }
+
+    @OneToMany(mappedBy = "idService", cascade=CascadeType.PERSIST)
+    @JsonIdentityReference(alwaysAsId = true)
+    @JsonIgnore
+    public List<BookingTrainerBO> getBookingTrainerBOList() {
+        return bookingTrainerBOList;
+    }
+
+    public void setBookingTrainerBOList(List<BookingTrainerBO> bookingTrainerBOList) {
+        this.bookingTrainerBOList = bookingTrainerBOList;
     }
 }
