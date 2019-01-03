@@ -65,6 +65,8 @@ public class EventService {
         bo.setPhone(dto.getPhone());
         bo.setPostalCode(dto.getPostalCode());
         bo.setPrice(dto.getPrice());
+        bo.setTitle(dto.getTitle());
+        bo.setImage(dto.getImage());
 
         return bo;
     }
