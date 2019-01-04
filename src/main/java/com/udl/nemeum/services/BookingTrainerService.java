@@ -8,6 +8,9 @@ import com.udl.nemeum.repository.TrainerSportRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service("bookingTrainerService")
 public class BookingTrainerService {
 
@@ -32,5 +35,21 @@ public class BookingTrainerService {
         BookingTrainerBO finalBo = bookingTrainerRepository.save(bo);
 
         return new BookingTrainerDTO(finalBo);
+    }
+
+
+    public List<BookingTrainerDTO> findByIdUser(Integer idUser){
+        List<BookingTrainerBO> bookingTrainerBOList = bookingTrainerRepository.findBookingsByIdUser(idUser);
+        return toDTO(bookingTrainerBOList);
+    }
+
+    public List<BookingTrainerDTO> toDTO(List<BookingTrainerBO> bookingTrainerBOList){
+        List<BookingTrainerDTO> bookingTrainerDTOList = new ArrayList<>();
+
+        for(BookingTrainerBO bo : bookingTrainerBOList){
+            bookingTrainerDTOList.add(new BookingTrainerDTO(bo));
+        }
+
+        return bookingTrainerDTOList;
     }
 }

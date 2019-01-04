@@ -13,4 +13,6 @@ public interface UserScenarioRepository extends JpaRepository<UserScenarioBO, In
     void deleteById(Integer id);
     @Query("FROM UserScenarioBO where id_scenario = :scenario and id_user = :user")
     UserScenarioBO findUserScenarioByScenario(Integer user, Integer scenario);
+    @Query("FROM UserScenarioBO where id_user = :user")
+    List<UserScenarioBO> findBookingByUser(Integer user);
 }
