@@ -8,13 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -28,6 +26,21 @@ public class TrainerSportController {
     @RequestMapping(method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE})
     public ResponseEntity<List<TrainerSportDTO>> list(UriComponentsBuilder ucBuilder) {
         List<TrainerSportDTO> listTrainerSport = trainerSportService.findAll();
+        return new ResponseEntity<List<TrainerSportDTO>>(listTrainerSport, HttpStatus.OK);
+
+    }
+
+    @RequestMapping(value = "/service/{idService}", method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE})
+    public ResponseEntity<List<TrainerSportDTO>> getService(@PathVariable("idService") Integer id) {
+        List<TrainerSportDTO> listTrainerSport = new ArrayList<>();
+        listTrainerSport.add(trainerSportService.findOneService(id));
+        return new ResponseEntity<List<TrainerSportDTO>>(listTrainerSport, HttpStatus.OK);
+
+    }
+
+    @RequestMapping(value = "/{idUser}", method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE})
+    public ResponseEntity<List<TrainerSportDTO>> findOne(@PathVariable("idUser") Integer id) {
+        List<TrainerSportDTO> listTrainerSport = trainerSportService.findTrainerServices(id);
         return new ResponseEntity<List<TrainerSportDTO>>(listTrainerSport, HttpStatus.OK);
 
     }
@@ -53,9 +66,9 @@ public class TrainerSportController {
 
     }
 
-    /*@RequestMapping(method = RequestMethod.DELETE)
+    @RequestMapping(value = "/{idService}", method = RequestMethod.DELETE)
     @Transactional
-    public void deleteTrainerSport(UriComponentsBuilder ucBuilder, @RequestBody TrainerSportDTO input) {
-        trainerSportService.deleteTeamUser(input.getId_trainer_user(), input.getId_sport_training_type());
-    }*/
+    public void deleteTrainerSport(@PathVariable("idService") Integer id) {
+        trainerSportService.delete(id);
+    }
 }

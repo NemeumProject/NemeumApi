@@ -45,12 +45,22 @@ public class TrainerSportService {
         return new TrainerSportDTO(trainerSportRepository.save(trainerSportBO));
     }
 
-    public void deleteTeamUser(Integer idTrainer, Integer idSport) {
-        if(idTrainer != null && idSport != null){
-            TrainerSportBO trainerSportBO = trainerSportRepository.findTrainerSport(idTrainer, idSport);
-            trainerSportRepository.delete(trainerSportBO);
+    public void delete(Integer idService) {
+        if(idService != null){
+            trainerSportRepository.deleteById(idService);
         }
 
+    }
+
+    public List<TrainerSportDTO> findTrainerServices(Integer idTrainer){
+        List<TrainerSportBO> bo = trainerSportRepositoryImpl.findServices(idTrainer);
+        return toDTO(bo);
+    }
+
+    public TrainerSportDTO findOneService(Integer idService){
+        TrainerSportBO bo = trainerSportRepository.findByidTrainingServicePost(idService);
+
+        return new TrainerSportDTO(bo);
     }
 
     public TrainerSportDTO modify(TrainerSportDTO input) {

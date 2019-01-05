@@ -68,4 +68,12 @@ public class TrainerSportRepositoryImpl implements TrainerSportRepositoryCustom 
 
         return q.getResultList();
     }
+
+    @Override
+    public List<TrainerSportBO> findServices(Integer idUser) {
+        String query = "SELECT * FROM trainer_sport where id_trainer_user = " + idUser + ";";
+        Query q = entityManager.createNativeQuery(query, TrainerSportBO.class);
+
+        return q.getResultList();
+    }
 }

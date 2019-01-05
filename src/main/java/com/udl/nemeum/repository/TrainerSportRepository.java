@@ -10,6 +10,6 @@ public interface TrainerSportRepository extends JpaRepository<TrainerSportBO, In
     TrainerSportBO findByidTrainingServicePost(Integer id);
     List<TrainerSportBO> findAll();
     void deleteById(Integer id);
-    @Query("FROM TrainerSportBO where id_trainer = :trainer and id_sport = :sport")
+    @Query("FROM TrainerSportBO where id_trainer_user = :trainer and id_sport = :sport")
     TrainerSportBO findTrainerSport(Integer trainer, Integer sport);
 }
