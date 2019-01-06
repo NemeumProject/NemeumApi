@@ -24,9 +24,10 @@ public class ScenarioBO {
     private String title;
     private String image;
     private String address;
+    private String city;
     private List<UserScenarioBO> userScenarioBOList;
 
-    public ScenarioBO(Integer idScenario, SportBO idSport, Double price, Boolean isIndoor, Integer capacity, CompanyUserBO idCompany, Date dateScenario, String description, String title, String image, String address, List<UserScenarioBO> userScenarioBOList) {
+    public ScenarioBO(Integer idScenario, SportBO idSport, Double price, Boolean isIndoor, Integer capacity, CompanyUserBO idCompany, Date dateScenario, String description, String title, String image, String address, String city, List<UserScenarioBO> userScenarioBOList) {
         this.idScenario = idScenario;
         this.idSport = idSport;
         this.price = price;
@@ -38,6 +39,7 @@ public class ScenarioBO {
         this.title = title;
         this.image = image;
         this.address = address;
+        this.city = city;
         this.userScenarioBOList = userScenarioBOList;
     }
 
@@ -146,6 +148,15 @@ public class ScenarioBO {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    @Column(name = "city")
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 
     @OneToMany(mappedBy = "scenarioBO", cascade=CascadeType.PERSIST)

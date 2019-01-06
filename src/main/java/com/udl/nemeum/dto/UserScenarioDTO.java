@@ -18,6 +18,7 @@ public class UserScenarioDTO {
     private Date endScenario;
     private Integer phone;
     private String email;
+    private String nameCustomer;
 
     public UserScenarioDTO(UserScenarioBO bo) {
         this.userScenario = bo.getUserScenario();
@@ -30,6 +31,7 @@ public class UserScenarioDTO {
         this.endScenario = bo.getEndScenario();
         this.phone = bo.getPhone();
         this.email = bo.getEmail();
+        this.nameCustomer = bo.getCustomerName();
     }
 
     public UserScenarioDTO(){
@@ -98,5 +100,13 @@ public class UserScenarioDTO {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getNameCustomer() {
+        return nameCustomer;
+    }
+
+    public void setNameCustomer(String nameCustomer) {
+        this.nameCustomer = nameCustomer;
     }
 }

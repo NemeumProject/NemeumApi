@@ -27,19 +27,19 @@ public class ScenarioRepositoryImpl implements ScenarioRepositoryCustom {
         }
 
         if(sport_id != null && price != null && city != null){
-            query += "WHERE sport_id = " + sport_id + " AND price <=" + price + " AND address LIKE " + "'%" + city + "%';";
+            query += "WHERE sport_id = " + sport_id + " AND price <=" + price + " AND city LIKE " + "'%" + city + "%';";
         }else if(sport_id != null && price != null && city == null) {
             query += "WHERE sport_id = " + sport_id + " AND price <=" + price + ";";
         }else if(sport_id != null && price == null && city != null){
-            query += "WHERE sport_id = " + sport_id + " AND address LIKE " + "'%" + city + "%';";
+            query += "WHERE sport_id = " + sport_id + " AND city LIKE " + "'%" + city + "%';";
         }else if(sport_id != null && price == null && city == null){
             query += "WHERE sport_id = " + sport_id + ";";
         }else if(sport_id == null && price != null && city != null){
-            query += "WHERE price <=" + price + " AND address LIKE " + "'%" + city + "%';";
+            query += "WHERE price <=" + price + " AND city LIKE " + "'%" + city + "%';";
         }else if(sport_id == null && price != null && city == null){
             query += "WHERE  price <=" + price + ";";
         }else if(sport_id == null && price == null && city != null){
-            query += "WHERE address LIKE " + "'%" + city + "%';";
+            query += "WHERE city LIKE " + "'%" + city + "%';";
         }
         Query q = entityManager.createNativeQuery(query, ScenarioBO.class);
 
@@ -60,19 +60,19 @@ public class ScenarioRepositoryImpl implements ScenarioRepositoryCustom {
         }
 
         if(sport_id != null && price != null && city != null){
-            query = "SELECT * FROM scenario WHERE company_id = " + company_id + " AND sport_id = " + sport_id + " AND price <=" + price + " AND address LIKE " + "'%" + city + "%';";
+            query = "SELECT * FROM scenario WHERE company_id = " + company_id + " AND sport_id = " + sport_id + " AND price <=" + price + " AND city LIKE " + "'%" + city + "%';";
         }else if(sport_id != null && price != null && city == null) {
             query = "SELECT * FROM scenario WHERE company_id = " + company_id + " AND sport_id = " + sport_id + " AND price <=" + price + ";";
         }else if(sport_id != null && price == null && city != null){
-            query = "SELECT * FROM scenario WHERE company_id = " + company_id + " AND sport_id = " + sport_id + " AND address LIKE " + "'%" + city + "%';";
+            query = "SELECT * FROM scenario WHERE company_id = " + company_id + " AND sport_id = " + sport_id + " AND city LIKE " + "'%" + city + "%';";
         }else if(sport_id != null && price == null && city == null){
             query = "SELECT * FROM scenario WHERE company_id = " + company_id + " AND sport_id = " + sport_id + ";";
         }else if(sport_id == null && price != null && city != null){
-            query = "SELECT * FROM scenario WHERE company_id = " + company_id + " AND price <=" + price + " AND address LIKE " + "'%" + city + "%';";
+            query = "SELECT * FROM scenario WHERE company_id = " + company_id + " AND price <=" + price + " AND city LIKE " + "'%" + city + "%';";
         }else if(sport_id == null && price != null && city == null){
             query = "SELECT * FROM scenario WHERE company_id = " + company_id + " AND  price <=" + price + ";";
         }else if(sport_id == null && price == null && city != null){
-            query = "SELECT * FROM scenario WHERE company_id = " + company_id + " AND address LIKE " + "'%" + city + "%';";
+            query = "SELECT * FROM scenario WHERE company_id = " + company_id + " AND city LIKE " + "'%" + city + "%';";
         }
 
         if(query == null){

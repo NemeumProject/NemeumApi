@@ -11,6 +11,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.transaction.Transactional;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -34,8 +35,10 @@ public class CompanyUserController {
     }
 
     @RequestMapping(value = "/{idUser}", method = RequestMethod.GET, produces = { MediaType.APPLICATION_JSON_VALUE})
-    public CompanyUserDTO getUser(@PathVariable("idUser") Integer id) {
-        return companyUserService.getCompanyUser(id);
+    public ResponseEntity<List<CompanyUserDTO>> getUser(@PathVariable("idUser") Integer id) {
+        List<CompanyUserDTO> user = new ArrayList<>();
+        user.add(companyUserService.getCompanyUser(id));
+        return new ResponseEntity<List<CompanyUserDTO>>(user, HttpStatus.OK);
     }
 
 

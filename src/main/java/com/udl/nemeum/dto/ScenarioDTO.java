@@ -9,16 +9,17 @@ public class ScenarioDTO {
 
     private Integer idScenario;
     private Integer idSport;
-    private Double price;//
+    private Double price;
     private Boolean isIndoor;
-    private Integer capacity;//
+    private Integer capacity;
     private Integer idCompany;
     @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd hh:mm:ss")
     private Date dateScenario;
-    private String description;//
-    private String title;//
+    private String description;
+    private String title;
     private String image;
-    private String address;//
+    private String address;
+    private String city;
 
     public ScenarioDTO(ScenarioBO bo) {
         this.idScenario = bo.getIdScenario();
@@ -32,6 +33,7 @@ public class ScenarioDTO {
         this.title = bo.getTitle();
         this.image = bo.getImage();
         this.address = bo.getAddress();
+        this.city = bo.getCity();
     }
 
     public ScenarioDTO(){
@@ -123,5 +125,13 @@ public class ScenarioDTO {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
     }
 }

@@ -20,8 +20,9 @@ public class UserScenarioBO {
     private Date endScenario;
     private Integer phone;
     private String email;
+    private String customerName;
 
-    public UserScenarioBO(Integer userScenario, IndividualUserBO userBO, ScenarioBO scenarioBO, Date dateBooking, Date startScenario, Date endScenario, Integer phone, String email) {
+    public UserScenarioBO(Integer userScenario, IndividualUserBO userBO, ScenarioBO scenarioBO, Date dateBooking, Date startScenario, Date endScenario, Integer phone, String email, String customerName) {
         this.userScenario = userScenario;
         this.userBO = userBO;
         this.scenarioBO = scenarioBO;
@@ -30,6 +31,7 @@ public class UserScenarioBO {
         this.endScenario = endScenario;
         this.phone = phone;
         this.email = email;
+        this.customerName = customerName;
     }
 
     public UserScenarioBO(){
@@ -111,4 +113,14 @@ public class UserScenarioBO {
     public void setEmail(String email) {
         this.email = email;
     }
+
+    @Column(name = "name_customer")
+    public String getCustomerName() {
+        return customerName;
+    }
+
+    public void setCustomerName(String customerName) {
+        this.customerName = customerName;
+    }
 }
+

@@ -1,6 +1,7 @@
 package com.udl.nemeum.services;
 
 import com.udl.nemeum.dto.UserScenarioDTO;
+import com.udl.nemeum.models.IndividualUserBO;
 import com.udl.nemeum.models.UserScenarioBO;
 import com.udl.nemeum.repository.IndividualUserRepository;
 import com.udl.nemeum.repository.ScenarioRepository;
@@ -28,11 +29,17 @@ public class UserScenarioService {
 
         userScenarioBO.setScenarioBO(scenarioRepository.findByidScenario(dto.getIdScenario()));
         if(dto.getIdUser() != null){
-            userScenarioBO.setUserBO(individualUserRepository.findByidIndividualUser(dto.getIdUser()));
+            IndividualUserBO bo = individualUserRepository.findByidIndividualUser(dto.getIdUser());
+            userScenarioBO.setUserBO(bo);
+            userScenarioBO.setCustomerName(bo.getFirstName());
+            userScenarioBO.setEmail(bo.getEmail());
+            userScenarioBO.setPhone(bo.getPhone());
+        }else{
+            userScenarioBO.setEmail(dto.getEmail());
+            userScenarioBO.setPhone(dto.getPhone());
+            userScenarioBO.setCustomerName(dto.getNameCustomer());
         }
         userScenarioBO.setDateBooking(dto.getDateBooking());
-        userScenarioBO.setEmail(dto.getEmail());
-        userScenarioBO.setPhone(dto.getPhone());
         userScenarioBO.setEndScenario(dto.getEndScenario());
         userScenarioBO.setStartScenario(dto.getStartScenario());
 

@@ -68,6 +68,7 @@ public class ScenarioService {
         bo.setTitle(dto.getTitle());
         bo.setAddress(dto.getAddress());
         bo.setImage(dto.getImage());
+        bo.setCity(dto.getCity());
 
         return bo;
     }
