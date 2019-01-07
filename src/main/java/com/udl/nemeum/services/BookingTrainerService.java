@@ -52,4 +52,10 @@ public class BookingTrainerService {
 
         return bookingTrainerDTOList;
     }
+
+    public void deleteBookingService(Integer idBookingTrainer) {
+        if(idBookingTrainer != null){
+            bookingTrainerRepository.deleteById(idBookingTrainer);
+        }
+    }
 }

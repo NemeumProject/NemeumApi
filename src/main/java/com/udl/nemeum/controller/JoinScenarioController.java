@@ -33,9 +33,9 @@ public class JoinScenarioController {
         return new ResponseEntity<List<UserScenarioDTO>>(bookings, HttpStatus.OK);
     }
 
-    @RequestMapping(method = RequestMethod.DELETE)
+    @RequestMapping(value = "/{userScenario}", method = RequestMethod.DELETE)
     @Transactional
-    public void deleteJoinScenario(UriComponentsBuilder ucBuilder, @RequestBody UserScenarioDTO input) {
-        userScenarioService.deleteUserScenario(input.getIdUser(), input.getIdScenario());
+    public void deleteJoinScenario(@PathVariable("userScenario") Integer id) {
+        userScenarioService.deleteUserScenario(id);
     }
 }

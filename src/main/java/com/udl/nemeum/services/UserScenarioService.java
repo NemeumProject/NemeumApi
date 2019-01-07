@@ -56,11 +56,9 @@ public class UserScenarioService {
         return userScenarioDTOList;
     }
 
-    public void deleteUserScenario(Integer idUser, Integer idScenario) {
-        if(idScenario != null && idUser != null){
-            UserScenarioBO userScenarioBO = userScenarioRepository.findUserScenarioByScenario(idUser, idScenario);
-            userScenarioRepository.delete(userScenarioBO);
+    public void deleteUserScenario(Integer idUserScenario) {
+        if(idUserScenario != null){
+            userScenarioRepository.deleteById(idUserScenario);
         }
-
     }
 }

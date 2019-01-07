@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 @RestController
@@ -29,5 +30,11 @@ public class BookingTrainerController {
 
         return bookingTrainerService.add(input);
 
+    }
+
+    @RequestMapping(value = "/{idBookingTrainer}", method = RequestMethod.DELETE)
+    @Transactional
+    public void deleteBooking(@PathVariable("idBookingTrainer") Integer id) {
+        bookingTrainerService.deleteBookingService(id);
     }
 }
