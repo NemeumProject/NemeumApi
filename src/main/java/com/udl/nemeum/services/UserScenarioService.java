@@ -9,6 +9,7 @@ import com.udl.nemeum.repository.UserScenarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,21 +26,40 @@ public class UserScenarioService {
     private ScenarioRepository scenarioRepository;
 
     public UserScenarioDTO add(UserScenarioDTO dto){
-        UserScenarioBO userScenarioBO = new UserScenarioBO();
+        List<UserScenarioBO> listUserScenario = userScenarioRepository.findAll();
 
-        userScenarioBO.setScenarioBO(scenarioRepository.findByidScenario(dto.getIdScenario()));
-        if(dto.getIdUser() != null){
-            userScenarioBO.setUserBO(individualUserRepository.findByidIndividualUser(dto.getIdUser()));
-
+        Boolean authorizedBooking = true;
+        UserScenarioDTO userScenarioDTO = null;
+        for(UserScenarioBO booking : listUserScenario){
+            if(dto.getStartScenario().equals(booking.getStartScenario()) && dto.getIdScenario().equals(booking.getScenarioBO().getIdScenario())){
+                authorizedBooking = false;
+            }else if(dto.getStartScenario().after(booking.getStartScenario()) && dto.getStartScenario().before(booking.getStartScenario()) && dto.getIdScenario().equals(booking.getScenarioBO().getIdScenario())){
+                authorizedBooking = false;
+            }else if(dto.getEndScenario().after(booking.getEndScenario()) && dto.getEndScenario().before(booking.getEndScenario()) && dto.getIdScenario().equals(booking.getScenarioBO().getIdScenario())){
+                authorizedBooking = false;
+            }else if(dto.getEndScenario().equals(booking.getEndScenario()) && dto.getIdScenario().equals(booking.getScenarioBO().getIdScenario())){
+                authorizedBooking = false;
+            }
         }
-        userScenarioBO.setEmail(dto.getEmail());
-        userScenarioBO.setPhone(dto.getPhone());
-        userScenarioBO.setCustomerName(dto.getNameCustomer());
-        userScenarioBO.setDateBooking(dto.getDateBooking());
-        userScenarioBO.setEndScenario(dto.getEndScenario());
-        userScenarioBO.setStartScenario(dto.getStartScenario());
 
-        return new UserScenarioDTO(userScenarioRepository.save(userScenarioBO));
+        if(authorizedBooking == true) {
+            UserScenarioBO userScenarioBO = new UserScenarioBO();
+            userScenarioBO.setScenarioBO(scenarioRepository.findByidScenario(dto.getIdScenario()));
+            if(dto.getIdUser() != null){
+                userScenarioBO.setUserBO(individualUserRepository.findByidIndividualUser(dto.getIdUser()));
+
+            }
+            userScenarioBO.setEmail(dto.getEmail());
+            userScenarioBO.setPhone(dto.getPhone());
+            userScenarioBO.setCustomerName(dto.getNameCustomer());
+            userScenarioBO.setDateBooking(dto.getDateBooking());
+            userScenarioBO.setEndScenario(dto.getEndScenario());
+            userScenarioBO.setStartScenario(dto.getStartScenario());
+
+            return new UserScenarioDTO(userScenarioRepository.save(userScenarioBO));
+        }else{
+           return  userScenarioDTO;
+        }
     }
 
     public List<UserScenarioDTO> findByIdUser(Integer idUser){

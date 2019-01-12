@@ -21,9 +21,15 @@ public class JoinScenarioController {
     private UserScenarioService userScenarioService;
 
     @RequestMapping(method = RequestMethod.POST, produces = { MediaType.APPLICATION_JSON_VALUE})
-    public UserScenarioDTO add(UriComponentsBuilder ucBuilder, @RequestBody UserScenarioDTO input) {
+    public ResponseEntity<?> add(UriComponentsBuilder ucBuilder, @RequestBody UserScenarioDTO input) {
 
-        return userScenarioService.add(input);
+        UserScenarioDTO userScenarioDTO = userScenarioService.add(input);
+
+        if(userScenarioDTO != null){
+            return new ResponseEntity<UserScenarioDTO>(userScenarioDTO, HttpStatus.OK);
+        }else{
+            return new ResponseEntity<String>("", HttpStatus.UNAUTHORIZED);
+        }
 
     }
 
