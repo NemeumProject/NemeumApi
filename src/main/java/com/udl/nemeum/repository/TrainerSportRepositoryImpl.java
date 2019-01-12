@@ -22,46 +22,45 @@ public class TrainerSportRepositoryImpl implements TrainerSportRepositoryCustom 
         String query = null;
         TrainerUserBO trainer = null;
         if(nameTrainer != null){
-            trainer = trainerUserRepository.findByfirstName(nameTrainer);
+            nameTrainer = nameTrainer.toLowerCase();
         }
-
-        query = "SELECT * FROM trainer_sport";
+        query = "SELECT service.* FROM trainer_sport service";
 
         if(nameTrainer != null && city != null && price != null && sport_id != null){
-            query += " WHERE id_trainer_user = " + trainer.getIdTrainerUser() + " AND training_city = '" + city + "' AND training_price <="  + price +
-                    " AND id_sport_training_type = " + sport_id + ";";
+            query += " INNER JOIN traineruser trainer on (service.id_trainer_user = trainer.id_trainer) WHERE lower (trainer.first_name) LIKE '%" + nameTrainer + "%' AND service.training_city = '" + city + "' AND service.training_price <="  + price +
+                    " AND service.id_sport_training_type = " + sport_id + ";";
         }else if(nameTrainer != null && city != null && price != null && sport_id == null) {
-            query += " WHERE id_trainer_user = " + trainer.getIdTrainerUser() + " AND training_city = '" + city + "' AND training_price <=" + price + ";";
+            query += " INNER JOIN traineruser trainer on (service.id_trainer_user = trainer.id_trainer) WHERE lower (trainer.first_name) LIKE '%" + nameTrainer + "%' AND service.training_city = '" + city + "' AND service.training_price <=" + price + ";";
         }else if(nameTrainer != null && city != null && price == null && sport_id != null) {
-            query += " WHERE id_trainer_user = " + trainer.getIdTrainerUser() + " AND training_city = '" + city +
-                    "' AND id_sport_training_type = " + sport_id + ";";
+            query += " INNER JOIN traineruser trainer on (service.id_trainer_user = trainer.id_trainer) WHERE lower (trainer.first_name) LIKE '%" + nameTrainer + "%'  AND service.training_city = '" + city +
+                    "' AND service.id_sport_training_type = " + sport_id + ";";
         }else if(nameTrainer != null && city == null && price != null && sport_id != null){
-            query += " WHERE id_trainer_user = " + trainer.getIdTrainerUser() + " AND training_price <="  + price +
-                    " AND id_sport_training_type = " + sport_id + ";";
+            query += " INNER JOIN traineruser trainer on (service.id_trainer_user = trainer.id_trainer) WHERE lower (trainer.first_name) LIKE '%" + nameTrainer + "%'  AND service.training_price <="  + price +
+                    " AND service.id_sport_training_type = " + sport_id + ";";
         }else if(nameTrainer != null && city != null && price == null && sport_id == null){
-            query += " WHERE id_trainer_user = " + trainer.getIdTrainerUser() + " AND training_city = '" + city + "';";
+            query += " INNER JOIN traineruser trainer on (service.id_trainer_user = trainer.id_trainer) WHERE lower (trainer.first_name) LIKE '%" + nameTrainer + "%'  AND service.training_city = '" + city + "';";
         }else if(nameTrainer != null && city == null && price == null && sport_id == null) {
-            query += " WHERE id_trainer_user = " + trainer.getIdTrainerUser() + ";";
+            query += " INNER JOIN traineruser trainer on (service.id_trainer_user = trainer.id_trainer) WHERE lower (trainer.first_name) LIKE '%" + nameTrainer + "%';";
         }else if(nameTrainer != null && city == null && price != null && sport_id == null) {
-            query += " WHERE id_trainer_user = " + trainer.getIdTrainerUser() + " AND training_price <= " + price + ";";
+            query += " INNER JOIN traineruser trainer on (service.id_trainer_user = trainer.id_trainer) WHERE lower (trainer.first_name) LIKE '%" + nameTrainer + "%' AND service.training_price <= " + price + ";";
         }else if(nameTrainer != null && city == null && price == null && sport_id != null){
-            query += " WHERE id_trainer_user = " + trainer.getIdTrainerUser() + " AND id_sport_training_type = " + sport_id + ";";
+            query += " INNER JOIN traineruser trainer on (service.id_trainer_user = trainer.id_trainer) WHERE lower (trainer.first_name) LIKE '%" + nameTrainer + "%' AND service.id_sport_training_type = " + sport_id + ";";
         }else if(nameTrainer == null && city != null && price != null && sport_id != null) {
-            query += " WHERE training_city = '" + city + "' AND training_price <=" + price +
-                    " AND id_sport_training_type = " + sport_id + ";";
+            query += " WHERE service.training_city = '" + city + "' AND service.training_price <=" + price +
+                    " AND service.id_sport_training_type = " + sport_id + ";";
         }else if(nameTrainer == null && city != null && price == null && sport_id != null){
-            query += " WHERE training_city = '" + city + "' AND id_sport_training_type = " + sport_id + ";";
+            query += " WHERE service.training_city = '" + city + "' AND service.id_sport_training_type = " + sport_id + ";";
         }else if(nameTrainer == null && city != null && price != null && sport_id == null){
-            query += " WHERE training_city = '" + city + "' AND training_price <="  + price +";";
+            query += " WHERE service.training_city = '" + city + "' AND service.training_price <="  + price +";";
         }else if(nameTrainer == null && city != null && price == null && sport_id == null){
-            query += " WHERE training_city = '" + city + "';";
+            query += " WHERE service.training_city = '" + city + "';";
         }else if(nameTrainer == null && city == null && price != null && sport_id != null){
-            query += " WHERE training_price <="  + price +
-                    " AND id_sport_training_type = " + sport_id + ";";
+            query += " WHERE service.training_price <="  + price +
+                    " AND service.id_sport_training_type = " + sport_id + ";";
         }else if(nameTrainer == null && city == null && price != null && sport_id == null){
-            query += " WHERE training_price <="  + price + ";";
+            query += " WHERE service.training_price <="  + price + ";";
         }else if(nameTrainer == null && city == null && price == null && sport_id != null){
-            query += " WHERE id_sport_training_type = " + sport_id + ";";
+            query += " WHERE service.id_sport_training_type = " + sport_id + ";";
         }
 
         Query q = entityManager.createNativeQuery(query, TrainerSportBO.class);
