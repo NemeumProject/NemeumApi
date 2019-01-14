@@ -81,10 +81,49 @@ public class ScenarioService {
         return scenarioDTO;
     }
 
-    public ScenarioDTO modifyScenario(ScenarioDTO input) {
-        ScenarioBO scenario = toBO(input);
-        scenario.setIdScenario(input.getIdScenario());
-        ScenarioBO resultScenario = scenarioRepository.save(scenario);
+    public ScenarioDTO modifyScenario(ScenarioDTO dto) {
+        ScenarioBO bo = scenarioRepository.findByidScenario(dto.getIdScenario());
+
+        if(dto.getIdCompany() != null){
+            bo.setIdCompany(companyUserRepository.findByidCompanyUser(dto.getIdCompany()));
+        }
+        if(dto.getCapacity() != null){
+            bo.setCapacity(dto.getCapacity());
+        }
+
+        if(dto.getDateScenario() != null){
+            bo.setDateScenario(dto.getDateScenario());
+        }
+
+        if(dto.getIdSport() != null){
+            bo.setIdSport(sportRepository.findByidSport(dto.getIdSport()));
+        }
+
+        if(dto.getIndoor() != null){
+            bo.setIndoor(dto.getIndoor());
+        }
+
+        if(dto.getPrice() != null){
+            bo.setPrice(dto.getPrice());
+        }
+        if(dto.getDescription() != null){
+            bo.setDescription(dto.getDescription());
+        }
+        if(dto.getTitle() != null){
+            bo.setTitle(dto.getTitle());
+        }
+
+        if(dto.getAddress() != null){
+            bo.setAddress(dto.getAddress());
+        }
+        if(dto.getImage() != null){
+            bo.setImage(dto.getImage());
+        }
+        if(dto.getCity() != null){
+            bo.setCity(dto.getCity());
+        }
+
+        ScenarioBO resultScenario = scenarioRepository.save(bo);
 
         return new ScenarioDTO(resultScenario);
     }
