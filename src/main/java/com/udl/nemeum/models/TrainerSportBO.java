@@ -10,7 +10,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name = "trainer_sport", schema = "nemeum")
+@Table(name = "trainer_sport")
 public class TrainerSportBO {
 
     private Integer idTrainingServicePost;

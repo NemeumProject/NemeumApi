@@ -8,7 +8,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-@Table(name = "event", schema = "nemeum")
+@Table(name = "event")
 public class EventBO {
 
     private Integer idEvent;

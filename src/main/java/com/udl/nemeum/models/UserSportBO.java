@@ -3,7 +3,7 @@ package com.udl.nemeum.models;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "user_sport", schema = "nemeum")
+@Table(name = "user_sport")
 public class UserSportBO {
 
     private Integer idUserSport;

@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-@Table(name = "sport", schema = "nemeum")
+@Table(name = "sport")
 public class SportBO {
 
     private Integer idSport;

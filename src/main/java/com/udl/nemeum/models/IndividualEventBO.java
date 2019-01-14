@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "user_event", schema = "nemeum")
+@Table(name = "user_event")
 public class IndividualEventBO {
 
     private Integer idUserEvent;
